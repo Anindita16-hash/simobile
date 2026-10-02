@@ -1,6 +1,13 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>profil-edit</ion-title>
+    <!--back button-->
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/profil"></ion-back-button>
+    </ion-buttons>
+    
+    <ion-title>
+      Edit Profil
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -10,4 +17,77 @@
       <ion-title size="large">profil-edit</ion-title>
     </ion-toolbar>
   </ion-header>
+
+    <!-- Foto Profil -->
+  <div class="user-profile">
+    <ion-avatar class="photo">
+      <img src="assets/icon/user-default.png" alt="Avatar">
+    </ion-avatar>
+
+    <ion-button fill="clear" size="small">
+      <ion-icon slot="start" name="camera-outline"></ion-icon>
+      Ubah Foto
+    </ion-button>
+  </div>
+
+  <!-- Data Pengguna -->
+  <div class="user-form">
+    <h2>Informasi Pengguna</h2>
+
+    <ion-list inset="true">
+
+      <!-- Username - unchangable -->
+      <ion-item>
+        <ion-icon slot="start" name="person-outline"></ion-icon>
+        <ion-label>
+          <p>Username</p>
+          <p>=USERNAME PLACEHOLDER=</p>
+        </ion-label>
+      </ion-item>
+
+      <!-- Nomor Telepon -->
+      <ion-item>
+        <ion-icon slot="start" name="call-outline"></ion-icon>
+        <ion-input label="Nomor Telepon" labelPlacement="stacked" type="tel" value="=PHONE PLACEHOLDER=">
+        </ion-input>
+      </ion-item>
+
+      <!-- Email -->
+      <ion-item>
+        <ion-icon slot="start" name="mail-outline"></ion-icon>
+        <ion-input label="Email" labelPlacement="stacked" type="email" value="=EMAIL PLACEHOLDER="></ion-input>
+      </ion-item>
+
+    </ion-list>
+  </div>
+
+  <!-- Data Toko -->
+  <div class="store-form">
+    <h2>Informasi Toko</h2>
+
+    <ion-list inset="true">
+
+      <!-- Nama Toko -->
+      <ion-item>
+        <ion-icon slot="start" name="storefront-outline">
+        </ion-icon>
+        <ion-input label="Nama Toko" labelPlacement="stacked" type="text" value="=STORE NAME PLACEHOLDER="></ion-input>
+      </ion-item>
+
+      <!-- Alamat Toko -->
+      <ion-item>
+        <ion-icon slot="start" name="location-outline"></ion-icon>
+        <ion-textarea label="Alamat Toko" labelPlacement="stacked" rows="3" value="=STORE ADDRESS PLACEHOLDER="></ion-textarea>
+      </ion-item>
+
+    </ion-list>
+  </div>
+
+  <!-- btn simpan -->
+  <div class="action">
+    <ion-button expand="block">
+      <ion-icon slot="start" name="save-outline"></ion-icon>
+      Simpan
+    </ion-button>
+  </div>
 </ion-content>
