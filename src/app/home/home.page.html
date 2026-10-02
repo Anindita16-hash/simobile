@@ -12,11 +12,84 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+    <!--ion-header (first header): lokasi di tab bar atas
+    jadi satu dengan tombol drawer menu -->
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Home</ion-title>
     </ion-toolbar>
   </ion-header>
 
+  <!--dashboard-header (second header)-->
+    <div class="header-dashboard">
+      <div class="store-info">
+        <h2>Laporan Harian</h2>
+        <p>=PLACEHOLDER NAMA TOKO=</p>
+      </div>
 
+      <div class="date-info">
+        <p>=PLACEHOLDER TANGGAL=</p>
+      </div>
+    </div>
+
+    <!--dashboard content-->
+    <div class="content-dashboard">
+      <!--card: total penjualan-->
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Total Penjualan</ion-card-title>
+          <ion-card-subtitle>Rp. =PLACEHOLDER TOTAL PENJUALAN=</ion-card-subtitle>
+        </ion-card-header>
+      </ion-card>
+
+      <!--grid: other summaries-->
+      <ion-grid>
+        <ion-row>
+          <!--Estimasi Untung-->
+          <ion-col size="6">
+            <ion-card>
+              <ion-card-header>
+                <ion-card-title>Estimasi Untung</ion-card-title>
+                <ion-card-subtitle>Rp. =PLACEHOLDER ESTIMASI UNTUNG=</ion-card-subtitle>
+              </ion-card-header>
+            </ion-card>
+          </ion-col>
+
+          <!--Jumlah Transaksi-->
+          <ion-col size="6">
+            <ion-card>
+              <ion-card-header>
+                <ion-card-title>Jumlah Transaksi</ion-card-title>
+                <ion-card-subtitle>=PLACEHOLDER JUMLAH TRANSAKSI=</ion-card-subtitle>
+              </ion-card-header>
+            </ion-card>
+          </ion-col>
+
+          <!--Barang Terjual-->
+          <ion-col size="6">
+            <ion-card>
+              <ion-card-header>
+                <ion-card-title>Barang Terjual</ion-card-title>
+                <ion-card-subtitle>=PLACEHOLDER BARANG TERJUAL=</ion-card-subtitle>
+              </ion-card-header>
+            </ion-card>
+          </ion-col>
+          
+          <!--Produk Terlaris-->
+          <ion-col size="6">
+            <ion-card>
+              <ion-card-header>
+                <ion-card-title>Produk Terlaris</ion-card-title>
+                <ion-card-subtitle>=PLACEHOLDER PRODUK TERLARIS=</ion-card-subtitle>
+              </ion-card-header>
+              <!--detail penjualan produk terlaris-->
+              <ion-card-content>
+                =PLACEHOLDER DETAIL Barang terjual PRODUK TERLARIS=
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+
+        </ion-row>
+      </ion-grid>
+    </div>
 </ion-content>
