@@ -1,8 +1,10 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <!--back button-->
+    <!--back button, manual-->
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/profil"></ion-back-button>
+      <ion-button routerLink="/profil">
+        <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
+      </ion-button>
     </ion-buttons>
     
     <ion-title>
