@@ -3,7 +3,9 @@ import { Service } from '@angular/core';
 @Service()
 export class Produk {
 
-    product = [
+    defaultImage = "assets/image/default.png";
+
+    products = [
         {
             name: "Beras Premium Sak",
             url: "",
@@ -116,8 +118,8 @@ export class Produk {
         }
     ];
 
-    addProduk(p_name: string, p_url: string, p_quantity: string, p_desc: string, p_cat: string, p_brand: string, p_stock: number, p_bprice: number, p_sprice: number) {
-        this.product.push({
+    addProduct(p_name: string, p_url: string, p_quantity: string, p_desc: string, p_cat: string, p_brand: string, p_stock: number, p_bprice: number, p_sprice: number) {
+        this.products.push({
             name: p_name,
             url: p_url,
             quantity: p_quantity,
@@ -128,5 +130,21 @@ export class Produk {
             buyPrice: p_bprice,
             sellPrice: p_sprice
         });
+    }
+
+    editProduct(index: number, product: any) {
+        this.products[index] = product;
+    }
+
+    searchProduct(keyword: string) {
+        const result = [];
+
+        for (let i = 0; i < this.products.length; i++) {
+            if (this.products[i].name.toLowerCase().includes(keyword.toLowerCase().trim())) {
+                result.push(this.products[i]);
+            }
+        }
+
+        return result;
     }
 }

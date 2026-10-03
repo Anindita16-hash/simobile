@@ -18,6 +18,20 @@
     </ion-toolbar>
   </ion-header>
 
+  <ion-list lines="full">
+    <ion-item>
+      <ion-input labelPlacement="floating" label="Cari Produk" [(ngModel)]="keyword" (keyup)="filter()"></ion-input>
+    </ion-item>
+  </ion-list>
+
+  <ion-grid>
+    <ion-row *ngFor="let products2 of chunkArray(products, 2); let i = index">
+      <ion-col *ngFor="let product of products2; let i2 = index">
+        <ion-img [src]="product.url == '' ? defaultImage : product.url"></ion-img>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
   <a routerLink="/produk/produk-form">Form Produk</a>
   <a routerLink="/produk/produk-detail">Detail Produk</a>
 </ion-content>
