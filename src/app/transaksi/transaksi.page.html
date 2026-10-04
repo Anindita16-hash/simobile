@@ -6,7 +6,7 @@
     </ion-buttons>
     
     <ion-title>
-      Transaksi
+      Riwayat Transaksi
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -17,4 +17,35 @@
       <ion-title size="large">transaksi</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <!--Default display saat belum ada transaksi-->
+  <div class="default-state">
+    <ion-icon name="receipt-outline" size="large"></ion-icon>
+    <p>Belum ada riwayat transaksi.</p>
+  </div>
+
+  <!--List item transaksi-->
+  <!--data dummy temporary-->
+  <ion-list>
+  <ion-item button detail="true" routerLink="/transaksi/transaksi-detail/1001">
+    <ion-label>
+      <h2>Transaksi #1001</h2>
+      <p>Tanggal: 4 Oktober 2026, 17:30</p>
+      <p><strong>Total: Rp. 85.000</strong></p>
+    </ion-label>
+  </ion-item>
+</ion-list>
+
+<!--placeholder
+  <ion-list>
+
+    <ion-item button detail="true" routerLink="/transaksi-detail/=ID TRANSAKSI=">
+      <ion-label>
+        <h2>Transaksi #=ID TRANSAKSI=</h2>
+        <p>Tanggal: =TANGGAL TRANSAKSI=</p>
+        <p><strong>Total: Rp. =TOTAL TRANSAKSI=</strong></p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+-->
 </ion-content>

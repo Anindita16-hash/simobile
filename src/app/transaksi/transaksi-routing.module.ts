@@ -7,8 +7,9 @@ const routes: Routes = [
   {
     path: '',
     component: TransaksiPage
-  },  {
-    path: 'transaksi-detail',
+  },
+  {
+    path: 'transaksi-detail/:id',
     loadChildren: () => import('./transaksi-detail/transaksi-detail.module').then( m => m.TransaksiDetailPageModule)
   }
 

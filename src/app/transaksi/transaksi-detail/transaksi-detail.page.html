@@ -1,12 +1,12 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <!--back button, manual-->
+    <!-- back button, manual -->
     <ion-buttons slot="start">
       <ion-button routerLink="/transaksi">
         <ion-icon slot="icon-only" name="arrow-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
-    
+
     <ion-title>
       Detail Transaksi
     </ion-title>
@@ -14,9 +14,109 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">transaksi-detail</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <!-- Header nota -->
+  <!-- data dummy temporary -->
+  <div class="header-nota">
+    <ion-icon name="receipt-outline" size="large"></ion-icon>
+    <h1>Transaksi #{{ idTransaksi }}</h1>
+    <p>Tanggal: 4 Oktober 2026, 17:30</p>
+  </div>
+
+  <ion-list inset="true">
+
+    <ion-list-header>
+      <ion-label>Daftar Barang</ion-label>
+    </ion-list-header>
+
+    <!-- Barang 1 -->
+    <ion-item>
+      <ion-label>
+        <h3>Kopi Arabika</h3>
+        <p>2 x Rp. 25.000</p>
+      </ion-label>
+
+      <ion-note slot="end">
+        Rp. 50.000
+      </ion-note>
+    </ion-item>
+
+    <!-- Barang 2 -->
+    <ion-item>
+      <ion-label>
+        <h3>Roti Cokelat</h3>
+        <p>1 x Rp. 20.000</p>
+      </ion-label>
+
+      <ion-note slot="end">
+        Rp. 20.000
+      </ion-note>
+    </ion-item>
+
+    <!-- Barang 3 -->
+    <ion-item>
+      <ion-label>
+        <h3>Air Mineral</h3>
+        <p>3 x Rp. 5.000</p>
+      </ion-label>
+
+      <ion-note slot="end">
+        Rp. 15.000
+      </ion-note>
+    </ion-item>
+
+  </ion-list>
+
+  <!-- Total keseluruhan -->
+  <ion-item lines="none" class="price-total">
+    <ion-label>
+      <h1>Total: Rp. 85.000</h1>
+    </ion-label>
+  </ion-item>
+
+
+  <!--
+    PLACEHOLDER / TEMPLATE DATA DINAMIS
+
+    <div class="header-nota">
+      <ion-icon name="receipt-outline" size="large"></ion-icon>
+      <h1>Transaksi #=ID TRANSAKSI=</h1>
+      <p>Tanggal: =TANGGAL TRANSAKSI=</p>
+    </div>
+
+    <ion-list inset="true">
+      <ion-list-header>
+        <ion-label>Daftar Barang</ion-label>
+      </ion-list-header>
+
+      Daftar item terjual
+
+      <ion-item>
+        <ion-label>
+          <h3>=NAMA PRODUK=</h3>
+          <p>=KUANTITAS= x Rp. =HARGA SATUAN=</p>
+        </ion-label>
+
+        <ion-note slot="end">
+          Rp. =SUBTOTAL=
+        </ion-note>
+      </ion-item>
+
+    </ion-list>
+
+    Total keseluruhan
+
+    <ion-item lines="none" class="price-total">
+      <ion-label>
+        <h1>Total: Rp. =TOTAL TRANSAKSI=</h1>
+      </ion-label>
+    </ion-item>
+  -->
+
 </ion-content>
