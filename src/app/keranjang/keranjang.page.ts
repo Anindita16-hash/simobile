@@ -10,6 +10,14 @@ export class KeranjangPage implements OnInit {
 
   constructor() { }
 
+  //temporary variable for search
+  keyword: string = '';
+
+  // temporary method
+  filter(){
+    
+  }
+
   ngOnInit() {
   }
 
