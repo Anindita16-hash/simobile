@@ -1,0 +1,16 @@
+.user-form,
+.store-form {
+  padding: 0 16px;
+  margin-bottom: 16px;
+
+  h2 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--ion-color-dark);
+  }
+}
+
+.action {
+  padding: 0 16px 24px;
+}

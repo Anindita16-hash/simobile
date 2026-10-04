@@ -1,3 +1,52 @@
+.header-dashboard {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 16px;
+
+  .store-info {
+    h2 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 0 0 4px;
+      color: var(--ion-color-dark);
+    }
+    p {
+      margin: 0;
+      color: var(--ion-color-medium);
+      font-size: 0.9rem;
+    }
+  }
+
+  .date-info {
+    p {
+      margin: 0;
+      font-size: 0.85rem;
+      color: var(--ion-color-medium);
+    }
+  }
+}
+
+.content-dashboard {
+  padding: 0 12px;
+
+  ion-card {
+    --background: var(--ion-item-background);
+  }
+
+  ion-card-title {
+    font-size: 1rem;
+    color: var(--ion-color-medium);
+  }
+
+  ion-card-subtitle {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--ion-color-primary);
+  }
+}
+
+/*
 #container {
   text-align: center;
 
@@ -25,3 +74,4 @@
 #container a {
   text-decoration: none;
 }
+*/

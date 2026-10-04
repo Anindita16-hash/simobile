@@ -1,0 +1,16 @@
+.about-footer {
+  text-align: center;
+  padding: 24px 16px;
+  color: var(--ion-color-medium);
+  font-size: 0.8rem;
+
+  p {
+    margin: 2px 0;
+  }
+}
+
+// badge versi, biar senada dengan warna tema
+ion-badge {
+  --background: var(--ion-color-secondary);
+  --color: var(--ion-color-secondary-contrast);
+}

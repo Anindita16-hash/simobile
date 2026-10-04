@@ -33,5 +33,105 @@
  */
 
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
-/* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import "@ionic/angular/css/palettes/dark.system.css";
+@import "@ionic/angular/css/palettes/dark.class.css";
+/* @import "@ionic/angular/css/palettes/dark.system.css"; */
+
+/**
+ * APP-WIDE CUSTOM STYLE
+ * -----------------------------------------------------
+ * Style yang dipakai berulang di banyak halaman,
+ * supaya tidak manual copy-past tiap *.page.scss
+ */
+
+// Avatar + foto profil - dipakai di profil n profil-edit
+.user-profile {
+  text-align: center;
+  padding: 24px 0;
+
+  .photo {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 12px;
+  }
+
+  h1 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 4px 0;
+  }
+
+  p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    color: var(--ion-color-medium);
+    font-size: 0.9rem;
+    margin: 2px 0;
+  }
+}
+
+// ikon besar header section - dipakai di tentang n transaksi-detail
+.icon-header {
+  text-align: center;
+  padding: 24px 0 16px;
+
+  ion-icon {
+    font-size: 56px;
+    color: var(--ion-color-primary);
+  }
+
+  h1 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin: 8px 0 4px;
+  }
+
+  p {
+    color: var(--ion-color-medium);
+    font-size: 0.9rem;
+    margin: 0;
+  }
+} 
+
+ // Empty state - dipakai di Keranjang, Transaksi, dll
+.empty-state {
+  text-align: center;
+  margin-top: 60px;
+  color: var(--ion-color-medium);
+
+  ion-icon {
+    font-size: 64px;
+  }
+
+  p {
+    margin-top: 12px;
+    font-size: 0.95rem;
+  }
+}
+
+// price-total - dipakai di keranjang n transaksi detail
+.price-total {
+  margin-top: 16px;
+  --background: var(--ion-color-light);
+  --border-radius: 8px;
+
+  h1 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 0;
+  }
+}
+
+// qty controller - dipakai di keranjang
+.qty-controller {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  span {
+    min-width: 20px;
+    text-align: center;
+    font-weight: 500;
+  }
+}
