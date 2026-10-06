@@ -7,6 +7,7 @@ export class Produk {
 
     products = [
         {
+            id: 0,
             name: "Beras Premium Sak",
             url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSckxmRUzzTdJPd4zU0d2W3Y_GoQac1PM2cLIrf9G_FKy_rC_xAdlYyht6G&s=10",
             quantity: "5000gr",
@@ -18,6 +19,7 @@ export class Produk {
             sellPrice: 83900,
         },
         {
+            id: 1,
             name: "Gula Pasir",
             url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSztqJDXQ6VzkjKIPpkcwpa-mJlRVB-nfDKKM-y1PTj715IaQ7USj0B79ys&s=10",
             quantity: "500gr",
@@ -29,6 +31,7 @@ export class Produk {
             sellPrice: 15000,
         },
         {
+            id: 2,
             name: "Telur Ayam Omega Pack",
             url: "https://akcdn.detik.net.id/visual/2024/12/31/ketahui-perbedaan-telur-biasa-dan-telur-omega-untuk-mpasi-anak_169.jpeg?",
             quantity: "10 butir",
@@ -40,6 +43,7 @@ export class Produk {
             sellPrice: 33600,
         },
         {
+            id: 3,
             name: "Bumbu Siap Pakai Nasi Goreng",
             url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpkVSqAdYxEq1PF6aC92cBDB-RppeEwuh8-ss9sOVRvLZnF6kghBpfN-0&s=10",
             quantity: "45gr",
@@ -51,6 +55,7 @@ export class Produk {
             sellPrice: 4500,
         },
         {
+            id: 4,
             name: "Sosis Single Original",
             url: "https://media.suara.com/pictures/653x366/2021/03/25/18530-ilustrasi-sosis.webp",
             quantity: "65gr",
@@ -62,6 +67,7 @@ export class Produk {
             sellPrice: 8800,
         },
         {
+            id: 5,
             name: "Ice Cream Vanilla Cup",
             url: "https://saltandbaker.com/wp-content/uploads/2019/10/Homemade-Vanilla-Ice-cream-6.jpg",
             quantity: "700ml",
@@ -73,6 +79,7 @@ export class Produk {
             sellPrice: 35000,
         },
         {
+            id: 6,
             name: "Air Mineral Botol",
             url: "https://images.alodokter.com/dk0z4ums3/image/upload/v1770794737/attached_image/air-mineral-yang-baik-untuk-kesehatan.jpg",
             quantity: "1500ml",
@@ -84,6 +91,7 @@ export class Produk {
             sellPrice: 9900,
         },
         {
+            id: 7,
             name: "Teh Lemon Madu Botol",
             url: "https://img.magnific.com/premium-photo/two-cups-tea-with-lemon-sliced-lemon-bowl-honey-wooden-table-vitamin-warming-drink-vertical-view_107288-4669.jpg?semt=ais_hybrid&w=740&q=80",
             quantity: "350ml",
@@ -95,6 +103,7 @@ export class Produk {
             sellPrice: 3500,
         },
         {
+            id: 8,
             name: "Pembersih Lantai Lemon Pouch",
             url: "https://d1vbn70lmn1nqe.cloudfront.net/prod/wp-content/uploads/2025/08/06124055/pembersih-lantai.jpg",
             quantity: "800ml",
@@ -106,6 +115,7 @@ export class Produk {
             sellPrice: 13100,
         },
         {
+            id: 9,
             name: "Amplop Putih Kecil",
             url: "https://image.made-in-china.com/202f0j00BRnUIPCKZoqz/Cheap-White-Plain-Post-Envelope.webp",
             quantity: "20 lembar",
@@ -120,6 +130,7 @@ export class Produk {
 
     addProduct(p_name: string, p_url: string, p_quantity: string, p_desc: string, p_cat: string, p_brand: string, p_stock: number, p_bprice: number, p_sprice: number) {
         this.products.push({
+            id: this.products.length,
             name: p_name,
             url: p_url,
             quantity: p_quantity,
@@ -132,11 +143,11 @@ export class Produk {
         });
     }
 
-    editProduct(index: number, product: any) {
-        this.products[index] = product;
+    editProduct(id: number, product: any) {
+        this.products[id] = product;
     }
 
-    searchProduct(keyword: string) {
+    searchProductByName(keyword: string) {
         const result = [];
 
         for (let i = 0; i < this.products.length; i++) {
@@ -146,5 +157,14 @@ export class Produk {
         }
 
         return result;
+    }
+
+    searchProductByID(id: number): any {
+        return this.products[id];
+    }
+
+    updateStock(id: number, quantity: number) { // can add or subtract, for subtract use negative amount
+        if (this.products[id].stock + quantity >= 0) this.products[id].stock += quantity;
+        else this.products[id].stock = 0;
     }
 }

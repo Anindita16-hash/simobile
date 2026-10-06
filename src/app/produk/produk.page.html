@@ -35,11 +35,11 @@
   <ion-grid>
     <ion-row class="product-row" *ngFor="let products2 of chunkArray(products, gridColumn); let i = index">
       <ion-col *ngFor="let product of products2; let i2 = index">
-
         <ion-card button [routerLink]="['/produk/produk-detail', (i*2+i2)]">
-          <ion-img [src]="product.url == '' ? defaultImage : product.url" class="product-image" alt="product.name"></ion-img>
+          <ion-img [src]="product.url == '' ? defaultImage : product.url" class="product-image"
+            alt="product.name"></ion-img>
           <ion-card-header>
-            <div class="row">
+            <div class="row-flex">
               <ion-card-title>{{ product.brand }} {{ product.name }}</ion-card-title>
               <ion-badge [color]="product.stock === 0 ? 'danger' : product.stock < 10 ? 'warning' : 'medium'">
                 Stok: {{ product.stock }}
@@ -48,13 +48,19 @@
             <ion-card-subtitle>{{ product.quantity }}</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>
-            <div class="row">
+            <div class="row-flex">
               <ion-label class="product-price">{{ formatPrice(product.sellPrice) }}</ion-label>
               <ion-button *ngIf="!isInCart(product)" (click)="addToCart(product)">Tambah ke Keranjang</ion-button>
-              <div class="row" *ngIf="isInCart(product)">
-                <ion-button>-</ion-button>
-                <ion-button>{{ quantity }}</ion-button>
-                <ion-button>+</ion-button>
+              <div class="row-flex" *ngIf="isInCart(product)">
+                <div class="qty-controller">
+                  <ion-button fill="clear" size="large">
+                    <ion-icon name="remove-circle-outline"></ion-icon>
+                  </ion-button>
+                  <span>{{ quantity }}</span>
+                  <ion-button fill="clear" size="large">
+                    <ion-icon name="add-circle-outline"></ion-icon>
+                  </ion-button>
+                </div>
               </div>
             </div>
           </ion-card-content>

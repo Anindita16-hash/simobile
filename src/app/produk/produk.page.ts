@@ -36,7 +36,7 @@ export class ProdukPage implements OnInit {
   }
 
   filter() {
-    this.products = this.produk.searchProduct(this.keyword);
+    this.products = this.produk.searchProductByName(this.keyword);
   }
 
   formatPrice(price: number) {
