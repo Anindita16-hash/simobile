@@ -21,19 +21,19 @@
   <!--profil user-->
   <div class="user-profile">
     <ion-avatar class="photo">
-      <img src="assets/icon/user-default.png" alt="Avatar">
+      <img src="{{profiles[7].url}}" alt="Avatar">
     </ion-avatar>
 
-    <h1>=USERNAME PLACEHOLDER=</h1>
+    <h1>{{profiles[7].userName}}</h1>
     
     <p>
       <ion-icon name="call-outline"></ion-icon>
-      =PHONE PLACEHOLDER=
+      {{profiles[7].phoneNumber}}
     </p>
 
     <p>
       <ion-icon name="mail-outline"></ion-icon>
-      =EMAIL PLACEHOLDER=
+      {{profiles[7].email}}
     </p>
   </div>
 
@@ -45,7 +45,7 @@
         <ion-icon slot="start" name="storefront-outline"></ion-icon>
         <ion-label>
           <p>Nama Toko</p>
-          <p>=STORE NAME PLACEHOLDER=</p>
+          <p>{{profiles[7].storeName}}</p>
         </ion-label>
       </ion-item>
 
@@ -53,14 +53,14 @@
         <ion-icon slot="start" name="location-outline"></ion-icon>
         <ion-label>
           <p>Alamat Toko</p>
-          <p>=STORE ADDRESS PLACEHOLDER=</p>
+          <p>{{profiles[7].storeAddress}}</p>
         </ion-label>
       </ion-item>
       
     </ion-list>
   </div>
 
-  <ion-button expand="block" routerLink="/profil/profil-edit">
+  <ion-button expand="block" routerLink="/profil/profil-edit/7">
     <ion-icon slot="start" name="create-outline"></ion-icon>
     Edit Profil
   </ion-button>
