@@ -18,17 +18,17 @@ export class TransaksiDetailPage implements OnInit {
   ) { }
 
   ngOnInit() {
+    
     // get transaction id from URL
     this.idTransaksi = this.route.snapshot.paramMap.get('id') || '';
-    
-    // convert ID from string to number
-    const id = Number(this.idTransaksi);
 
     // get transaction from service
-    this.transaction = this.transaksi.getTransactionId(id);
+    this.transaction = this.transaksi.getTransactionId(this.idTransaksi);
 
-    console.log('ID Transaksi:', id);
+    console.log('ID Transaksi:', this.idTransaksi);
     console.log('Transaction detail:', this.transaction);
+    
+
   }
 
 }

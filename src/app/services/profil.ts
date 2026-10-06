@@ -9,10 +9,10 @@ export class Profil {
         {
             id: 0,
             url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtLCzpM03U9a8maOxL1WE-p7ru0tUvdLcx76AB6KUhRw&s",
-            userName: "Nadin",
+            userName: "Marni",
             phoneNumber: "081234567890",
-            email: "nadCraft@gmail.com",
-            storeName: "Craft & Art",
+            email: "makjaya@gmail.com",
+            storeName: "Toko Makmur Jaya",
             storeAddress: "Jl. Ngagel Madya No. 45, Gubeng, Surabaya",
         },
         {
