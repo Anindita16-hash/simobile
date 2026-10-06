@@ -1,95 +1,139 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <!--drawer set-->
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar color="light">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    
-    <ion-title>
-      Keranjang
-    </ion-title>
+    <ion-title>Keranjang</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">keranjang</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <!-- Toggle Tambah barang + search -->
-  <ion-button fill="clear">
-    <ion-icon name="search" slot="start"></ion-icon>
-  </ion-button>
+  <!-- SEARCH BAR PENCARIAN CEPAT -->
+  <div class="search-container">
+    <ion-searchbar 
+      [(ngModel)]="searchKeyword" 
+      (ionInput)="onSearchChange()" 
+      placeholder="Cari Barang untuk Ditambahkan"
+      search-icon="search-outline"
+      show-clear-button="always">
+    </ion-searchbar>
 
-  <!--search bar (collapsible), muncul if toggle diklik-->
-  <ion-searchbar placeholder="Cari Barang untuk Ditambahkan" animated="true" [(ngModel)]="keyword" (ionInput)="filter()"></ion-searchbar>
+    <!-- HASIL PENCARIAN -->
+    <div class="search-results-list" *ngIf="hasSearched">
+      <ion-list lines="full" *ngIf="searchResults.length > 0">
+        <ion-item 
+          button 
+          *ngFor="let product of searchResults" 
+          (click)="selectSearchResult(product)"
+          [disabled]="(product.stock ?? product.stok) <= 0">
+          
+          <ion-label>
+            <h2>{{ product.name || product.nama }}</h2>
+          </ion-label>
+          
+          <ion-note slot="end" color="dark" class="search-item-spec">
+            {{ formatPrice(product.sellPrice || product.hargaJual) }} - stok: {{ product.stock ?? product.stok }}
+          </ion-note>
+        </ion-item>
+      </ion-list>
 
-  <!--hasil pencarian-->
-  <ion-list>
-    <ion-item button>
-      <ion-label>=NAMA PRODUK HASIL CARI=</ion-label>
-      <p>Rp. =HARGA PRODUK= - stok: =STOK PRODUK=</p>
-    </ion-item>
-  </ion-list>
-
-<!--Default kalau keranjang kosong-->
-<div class="empty-state">
-  <ion-icon name="cart-outline" size="large"></ion-icon>
-  <p>Keranjang masih kosong</p>
-</div>
-
-<!--list item keranjang-->
-<ion-list>
-  <ion-item-sliding>
-    <ion-item>
-      <ion-label>
-        <h2>=NAMA PRODUK=</h2>
-        <p>Harga: Rp. =HARGA PRODUK=</p>
-        <p>Stok tersedia: Rp. =STOK PRODUK=</p>
-        <p><strong>Subtotal: Rp. =SUBTOTAL=</strong></p>
-      </ion-label>
-
-      <!--QTY controller-->
-      <div slot="end" class="qty-controller">
-        <ion-button fill="clear" size="small">
-          <ion-icon name="remove-circle-outline"></ion-icon>
-        </ion-button>
-      
-        <span>=QTY PLACEHOLDER=</span>
-
-        <ion-button fill="clear" size="small">
-          <ion-icon name="add-circle-outline"></ion-icon>
-        </ion-button>
+      <div class="no-result ion-padding ion-text-center" *ngIf="searchResults.length === 0">
+        <p color="medium">Produk tidak tersedia</p>
       </div>
-    </ion-item>
-    
-    <!--btn delete barang dari keranjang-->
-    <ion-button fill="clear" color="danger" slot="end">
-      <ion-icon name="trash-outline"></ion-icon>
-    </ion-button>
+    </div>
+  </div>
 
-  </ion-item-sliding>
-</ion-list>
+  <!-- KONDISI KERANJANG KOSONG -->
+  <div class="empty-cart-container ion-text-center" *ngIf="cartItems.length === 0">
+    <ion-icon name="cart-outline" class="empty-cart-icon"></ion-icon>
+    <p class="empty-cart-text">Keranjang masih kosong</p>
+  </div>
 
-  <!--Total keseluruhan-->
-  <ion-item lines="none" class="price-total">
-    <ion-label>
-      <h1>Total: Rp. =TOTAL BELANJA=</h1>
-    </ion-label>
-  </ion-item>
+  <!-- DAFTAR ITEM KERANJANG -->
+  <div class="cart-items-container" *ngIf="cartItems.length > 0">
+    <ion-list lines="none">
+      <ion-item-sliding *ngFor="let item of cartItems">
+        <ion-item class="cart-item-row" lines="none">
+          <div class="cart-item-wrapper">
+            
+            <!-- INFORMASI PRODUK -->
+            <div class="item-info">
+              <h2 class="item-title">{{ item.product.name || item.product.nama }}</h2>
+              <p class="item-detail">Harga: {{ formatPrice(item.product.sellPrice || item.product.hargaJual) }}</p>
+              <p class="item-detail">Stok tersedia: {{ item.product.stock ?? item.product.stok }}</p>
+              <p class="item-subtotal">Subtotal: {{ formatPrice(item.subtotal) }}</p>
+              
+              <!-- TOMBOL HAPUS ITEM (TEMPAT SAMPAH) -->
+              <ion-button fill="clear" color="danger" class="btn-delete-item" (click)="removeItem(item.product.id)">
+                <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+              </ion-button>
+            </div>
 
-  <!--btn konfirmasi Transaksi-->
-  <ion-button expand="block">
-    <ion-icon slot="start" name="checkmark-circle-outline"></ion-icon>
-    Konfirmasi Transaksi
-  </ion-button>
+            <!-- KONTROL (+ / -) -->
+            <div class="item-qty-control">
+              <ion-button 
+                fill="clear" 
+                size="small" 
+                color="success" 
+                (click)="decreaseQty(item)"
+                [disabled]="(item.qty || 1) <= 1">
+                <ion-icon name="remove-circle-outline" slot="icon-only"></ion-icon>
+              </ion-button>
 
-  <!--btn batal transaksi-->
-  <ion-button expand="block" fill="outline" color="medium">
-    <ion-icon slot="start" name="close-circle-outline"></ion-icon>
-    Batal Transaksi
-  </ion-button>
+              <span class="qty-text">{{ item.qty ?? 1 }}</span>
+
+              <ion-button 
+                fill="clear" 
+                size="small" 
+                color="success" 
+                (click)="increaseQty(item)"
+                [disabled]="(item.qty || 1) >= (item.product.stock ?? item.product.stok)">
+                <ion-icon name="add-circle-outline" slot="icon-only"></ion-icon>
+              </ion-button>
+            </div>
+
+          </div>
+        </ion-item>
+
+        <!-- SWIPE TO DELETE -->
+        <ion-item-options side="end">
+          <ion-item-option color="danger" (click)="removeItem(item.product.id)">
+            <ion-icon name="trash" slot="icon-only"></ion-icon>
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </div>
 
 </ion-content>
+
+<!-- TOTAL & BUTTONS -->
+<ion-footer class="ion-no-border footer-action-container">
+  <div class="total-banner">
+    <h2>Total: {{ formatPrice(totalPrice) }}</h2>
+  </div>
+
+  <div class="action-buttons ion-padding-horizontal ion-padding-bottom">
+    <ion-button 
+      expand="block" 
+      color="success" 
+      class="btn-konfirmasi"
+      [disabled]="cartItems.length === 0"
+      (click)="confirmTransaction()">
+      <ion-icon name="checkmark-circle-outline" slot="start"></ion-icon>
+      KONFIRMASI TRANSAKSI
+    </ion-button>
+
+    <ion-button 
+      expand="block" 
+      fill="outline" 
+      color="medium" 
+      class="btn-batal"
+      [disabled]="cartItems.length === 0"
+      (click)="cancelTransaction()">
+      <ion-icon name="close-circle-outline" slot="start"></ion-icon>
+      BATAL TRANSAKSI
+    </ion-button>
+  </div>
+</ion-footer>

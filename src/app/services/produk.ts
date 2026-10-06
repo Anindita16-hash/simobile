@@ -1,6 +1,9 @@
-import { Service } from '@angular/core';
+import { Injectable } from '@angular/core';
 
-@Service()
+@Injectable({
+    providedIn: 'root'
+})
+
 export class Produk {
 
     defaultImage = "assets/image/default.png";
@@ -158,7 +161,12 @@ export class Produk {
     }
 
     editProduct(id: string, product: any) {
-        this.products[this.searchProductByID(id).id] = product;
+        const index = this.products.findIndex(p => p.id === id);
+        if (index !== -1) {
+            this.products[index] = product;
+        }
+        //punya kak Geuss
+        //this.products[this.searchProductByID(id).id] = product;
     }
 
     searchProductByName(keyword: string) {

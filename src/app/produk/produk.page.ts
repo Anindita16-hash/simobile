@@ -11,14 +11,12 @@ export class ProdukPage implements OnInit {
 
   products: any[] = [];
   defaultImage: string = "";
-
   keyword: string = "";
-  searchFocus: boolean = false;
-
+  //searchFocus: boolean = false;
   gridColumn: number = 3;
 
   // temp
-  quantity: number = 0;
+  //quantity: number = 0;
 
   constructor(private produk: Produk) { }
 
@@ -27,11 +25,35 @@ export class ProdukPage implements OnInit {
     this.defaultImage = this.produk.defaultImage;
   }
 
+  chunkArray(arr: any[], chunkSize: number): any[][] {
+    if (!arr) return [];
+    const result = [];
+    for (let i = 0; i < arr.length; i += chunkSize) {
+      result.push(arr.slice(i, i + chunkSize));
+    }
+    return result;
+  }
+
+  filter() {
+    if (!this.keyword || this.keyword.trim() === '') {
+      this.products = this.produk.products;
+    } else {
+      this.products = this.produk.searchProductByName(this.keyword);
+    }
+  }
+
+  formatPrice(price: number) {
+    return 'Rp. ' + (price ? price.toLocaleString('id-ID') : '0');
+  }
+  
+  /*
+  //Punya kak Geuss
   setInput(name: string) {
     this.keyword = name;
     this.searchFocus = false;
     this.filter()
   }
+
 
   chunkArray(arr_ori: any[], chunkSize: number): any[][] {
     const result = [];
@@ -68,4 +90,5 @@ export class ProdukPage implements OnInit {
   addToCart(product: any) {
     this.quantity += 1;
   }
+    */
 }
