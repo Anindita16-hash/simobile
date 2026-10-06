@@ -18,20 +18,46 @@
     </ion-toolbar>
   </ion-header>
 
+  <!--search bar-->
   <ion-list lines="full">
     <ion-item>
       <ion-input labelPlacement="floating" label="Cari Produk" [(ngModel)]="keyword" (keyup)="filter()"></ion-input>
     </ion-item>
   </ion-list>
 
+  <!--empty state default-->
+  <div class="empty-state" *ngIf="products.length === 0">
+    <ion-icon name="cube-outline" size="large"></ion-icon>
+    <p>Belum ada produk.</p>
+
+  </div>
+
+  <!--product list-->
   <ion-grid>
     <ion-row *ngFor="let products2 of chunkArray(products, 2); let i = index">
       <ion-col *ngFor="let product of products2; let i2 = index">
-        <ion-img [src]="product.url == '' ? defaultImage : product.url"></ion-img>
+              
+        <ion-card button [routerLink]="['/produk/produk-detail', (i*2+i2)]">
+
+          <ion-img [src]="product.url == '' ? defaultImage : product.url"></ion-img>
+
+          <ion-card-header>
+            <ion-card-title>{{ product.name }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p class="product-price">Rp. {{product.sellPrice | number }}</p>
+            <ion-badge [color]="product.stock === 0 ? 'danger' : 'medium'">
+              Stok: {{ product.stock }}
+            </ion-badge>
+          </ion-card-content>
+        </ion-card>
+
       </ion-col>
     </ion-row>
   </ion-grid>
 
-  <a routerLink="/produk/produk-form">Form Produk</a>
-  <a routerLink="/produk/produk-detail">Detail Produk</a>
+  <!--btn tambah produk-->
+  <ion-button class="btn-tambah=produk" shape="round" routerLink="/produk/produk-form">
+    <ion-icon name="add" slot="icon-only"></ion-icon>
+  </ion-button>
 </ion-content>
