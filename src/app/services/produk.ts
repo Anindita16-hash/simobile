@@ -8,7 +8,7 @@ export class Produk {
     products = [
         {
             name: "Beras Premium Sak",
-            url: "",
+            url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSckxmRUzzTdJPd4zU0d2W3Y_GoQac1PM2cLIrf9G_FKy_rC_xAdlYyht6G&s=10",
             quantity: "5000gr",
             description: "",
             category: "Sembako",
@@ -18,8 +18,8 @@ export class Produk {
             sellPrice: 83900,
         },
         {
-            name: "Gula Halus",
-            url: "",
+            name: "Gula Pasir",
+            url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSztqJDXQ6VzkjKIPpkcwpa-mJlRVB-nfDKKM-y1PTj715IaQ7USj0B79ys&s=10",
             quantity: "500gr",
             description: "",
             category: "Sembako",
@@ -30,7 +30,7 @@ export class Produk {
         },
         {
             name: "Telur Ayam Omega Pack",
-            url: "",
+            url: "https://akcdn.detik.net.id/visual/2024/12/31/ketahui-perbedaan-telur-biasa-dan-telur-omega-untuk-mpasi-anak_169.jpeg?",
             quantity: "10 butir",
             description: "",
             category: "Sembako",
@@ -41,7 +41,7 @@ export class Produk {
         },
         {
             name: "Bumbu Siap Pakai Nasi Goreng",
-            url: "",
+            url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpkVSqAdYxEq1PF6aC92cBDB-RppeEwuh8-ss9sOVRvLZnF6kghBpfN-0&s=10",
             quantity: "45gr",
             description: "",
             category: "Bahan Masak & Bumbu",
@@ -52,7 +52,7 @@ export class Produk {
         },
         {
             name: "Sosis Single Original",
-            url: "",
+            url: "https://media.suara.com/pictures/653x366/2021/03/25/18530-ilustrasi-sosis.webp",
             quantity: "65gr",
             description: "",
             category: "Makanan Beku",
@@ -63,7 +63,7 @@ export class Produk {
         },
         {
             name: "Ice Cream Vanilla Cup",
-            url: "",
+            url: "https://saltandbaker.com/wp-content/uploads/2019/10/Homemade-Vanilla-Ice-cream-6.jpg",
             quantity: "700ml",
             description: "",
             category: "Makanan Beku",
@@ -74,7 +74,7 @@ export class Produk {
         },
         {
             name: "Air Mineral Botol",
-            url: "",
+            url: "https://images.alodokter.com/dk0z4ums3/image/upload/v1770794737/attached_image/air-mineral-yang-baik-untuk-kesehatan.jpg",
             quantity: "1500ml",
             description: "",
             category: "Minuman",
@@ -85,7 +85,7 @@ export class Produk {
         },
         {
             name: "Teh Lemon Madu Botol",
-            url: "",
+            url: "https://img.magnific.com/premium-photo/two-cups-tea-with-lemon-sliced-lemon-bowl-honey-wooden-table-vitamin-warming-drink-vertical-view_107288-4669.jpg?semt=ais_hybrid&w=740&q=80",
             quantity: "350ml",
             description: "",
             category: "Minuman",
@@ -96,7 +96,7 @@ export class Produk {
         },
         {
             name: "Pembersih Lantai Lemon Pouch",
-            url: "",
+            url: "https://d1vbn70lmn1nqe.cloudfront.net/prod/wp-content/uploads/2025/08/06124055/pembersih-lantai.jpg",
             quantity: "800ml",
             description: "",
             category: "Perawatan Rumah",
@@ -107,7 +107,7 @@ export class Produk {
         },
         {
             name: "Amplop Putih Kecil",
-            url: "",
+            url: "https://image.made-in-china.com/202f0j00BRnUIPCKZoqz/Cheap-White-Plain-Post-Envelope.webp",
             quantity: "20 lembar",
             description: "",
             category: "Alat Tulis",

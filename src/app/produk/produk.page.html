@@ -4,7 +4,7 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    
+
     <ion-title>
       Produk
     </ion-title>
@@ -29,29 +29,36 @@
   <div class="empty-state" *ngIf="products.length === 0">
     <ion-icon name="cube-outline" size="large"></ion-icon>
     <p>Belum ada produk.</p>
-
   </div>
 
   <!--product list-->
   <ion-grid>
-    <ion-row *ngFor="let products2 of chunkArray(products, 2); let i = index">
+    <ion-row class="product-row" *ngFor="let products2 of chunkArray(products, gridColumn); let i = index">
       <ion-col *ngFor="let product of products2; let i2 = index">
-              
+
         <ion-card button [routerLink]="['/produk/produk-detail', (i*2+i2)]">
-
-          <ion-img [src]="product.url == '' ? defaultImage : product.url"></ion-img>
-
+          <ion-img [src]="product.url == '' ? defaultImage : product.url" class="product-image" alt="product.name"></ion-img>
           <ion-card-header>
-            <ion-card-title>{{ product.name }}</ion-card-title>
+            <div class="row">
+              <ion-card-title>{{ product.brand }} {{ product.name }}</ion-card-title>
+              <ion-badge [color]="product.stock === 0 ? 'danger' : product.stock < 10 ? 'warning' : 'medium'">
+                Stok: {{ product.stock }}
+              </ion-badge>
+            </div>
+            <ion-card-subtitle>{{ product.quantity }}</ion-card-subtitle>
           </ion-card-header>
           <ion-card-content>
-            <p class="product-price">Rp. {{product.sellPrice | number }}</p>
-            <ion-badge [color]="product.stock === 0 ? 'danger' : 'medium'">
-              Stok: {{ product.stock }}
-            </ion-badge>
+            <div class="row">
+              <ion-label class="product-price">{{ formatPrice(product.sellPrice) }}</ion-label>
+              <ion-button *ngIf="!isInCart(product)" (click)="addToCart(product)">Tambah ke Keranjang</ion-button>
+              <div class="row" *ngIf="isInCart(product)">
+                <ion-button>-</ion-button>
+                <ion-button>{{ quantity }}</ion-button>
+                <ion-button>+</ion-button>
+              </div>
+            </div>
           </ion-card-content>
         </ion-card>
-
       </ion-col>
     </ion-row>
   </ion-grid>

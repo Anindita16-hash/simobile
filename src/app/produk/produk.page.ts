@@ -13,6 +13,10 @@ export class ProdukPage implements OnInit {
   defaultImage: string = "";
 
   keyword: string = "";
+  gridColumn: number = 3;
+
+  // temp
+  quantity: number = 0;
 
   constructor(private produk: Produk) { }
 
@@ -21,11 +25,11 @@ export class ProdukPage implements OnInit {
     this.defaultImage = this.produk.defaultImage;
   }
 
-  chunkArray(arr_ori: any[], chucnkSize: number): any[][] {
+  chunkArray(arr_ori: any[], chunkSize: number): any[][] {
     const result = [];
 
-    for (let i = 0; i < arr_ori.length; i += chucnkSize) {
-      result.push(arr_ori.slice(i, i + chucnkSize));
+    for (let i = 0; i < arr_ori.length; i += chunkSize) {
+      result.push(arr_ori.slice(i, i + chunkSize));
     }
 
     return result;
@@ -33,5 +37,18 @@ export class ProdukPage implements OnInit {
 
   filter() {
     this.products = this.produk.searchProduct(this.keyword);
+  }
+
+  formatPrice(price: number) {
+    return "Rp. " + price.toLocaleString('id-ID');
+  }
+
+  isInCart(product: any) {
+    if (this.quantity < 1) return false;
+    else return true;
+  }
+
+  addToCart(product: any) {
+    this.quantity += 1;
   }
 }
