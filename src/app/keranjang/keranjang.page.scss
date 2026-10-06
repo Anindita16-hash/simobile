@@ -1,3 +1,9 @@
+ion-content {
+  --padding-bottom: 180px;
+}
+
+  // SEARCH
+  
 .search-container {
   position: relative;
   padding: 8px 12px;
@@ -9,11 +15,8 @@
     padding: 0;
   }
 
-  .search-results-box {
-    position: absolute;
-    top: 100%;
-    left: 12px;
-    right: 12px;
+  .search-results-list {
+    position: relative;
     z-index: 99;
     background: #ffffff;
     border: 1px solid #e0e0e0;
@@ -24,20 +27,20 @@
 
     ion-item {
       --padding-start: 12px;
+      --padding-end: 12px;
       font-size: 14px;
 
-      h3 {
+      h2 {
         font-weight: 600;
         margin: 0;
       }
 
-      .search-info {
+      .search-item-spec {
         font-size: 13px;
-        color: #555;
       }
     }
 
-    .not-found-msg {
+    .no-result {
       padding: 12px;
       text-align: center;
       color: #888;
@@ -46,7 +49,10 @@
   }
 }
 
-.empty-cart-state {
+
+  // EMPTY STATE
+  
+.empty-cart-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -54,81 +60,121 @@
   margin-top: 60px;
   color: #8c8c8c;
 
-  ion-icon {
+  .empty-cart-icon {
     font-size: 64px;
     margin-bottom: 8px;
   }
 
-  p {
+  .empty-cart-text {
     font-size: 15px;
     margin: 0;
   }
 }
 
-.cart-list {
-  padding: 0;
 
-  .cart-item {
+   // CART ITEMS
+   
+.cart-items-container {
+  padding: 0 0 20px 0;
+
+  ion-list {
+    padding: 0;
+  }
+
+  .cart-item-row {
     --padding-start: 16px;
     --padding-end: 16px;
     --inner-padding-end: 0;
+  }
 
-    .item-detail-left {
-      flex: 1;
-      padding: 8px 0;
+  .cart-item-wrapper {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    padding: 8px 0;
+  }
 
-      .product-title {
-        font-size: 15px;
-        font-weight: bold;
-        margin: 0 0 4px 0;
-        color: #000;
+  .item-info {
+    flex: 1;
+    min-width: 0;
+    padding-right: 8px;
+
+    .item-title {
+      font-size: 15px;
+      font-weight: bold;
+      margin: 0 0 4px 0;
+      color: #000;
+    }
+
+    .item-detail {
+      margin: 2px 0;
+      font-size: 13px;
+      color: #555;
+    }
+
+    .item-subtotal {
+      margin: 4px 0 0 0;
+      font-size: 13px;
+      font-weight: 600;
+      color: #222;
+    }
+
+    .btn-delete-item {
+      margin: 4px 0 0 0;
+      --padding-start: 0;
+      --padding-end: 0;
+
+      ion-icon {
+        font-size: 20px;
       }
+    }
+  }
 
-      p {
-        margin: 2px 0;
-        font-size: 13px;
-        color: #555;
-      }
+  .item-qty-control {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
 
-      .subtotal-text {
-        color: #222;
-        margin-top: 4px;
-      }
+    ion-button {
+      --padding-start: 4px;
+      --padding-end: 4px;
+      margin: 0;
 
-      .btn-trash-inline {
-        margin-top: 6px;
-        --padding-start: 0;
-        ion-icon {
-          font-size: 20px;
-        }
+      ion-icon {
+        font-size: 24px;
       }
     }
 
-    .qty-controller-right {
-      display: flex;
-      align-items: center;
-
-      ion-button {
-        --padding-start: 4px;
-        --padding-end: 4px;
-        ion-icon {
-          font-size: 24px;
-        }
-      }
-
-      .qty-number {
-        font-weight: bold;
-        font-size: 15px;
-        padding: 0 4px;
-      }
+    .qty-text {
+      min-width: 24px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 15px;
     }
   }
 }
 
-.cart-footer {
+
+  //FOOTER
+  
+
+.footer-action-container {
   background: #ffffff;
   border-top: 1px solid #e0e0e0;
+
   padding: 12px 16px 16px 16px;
+
+  /*
+   * Keep the footer visually above
+   * the scrolling cart content.
+   */
+  position: relative;
+  z-index: 10;
+
+  /*
+   * Make sure the footer itself is opaque.
+   */
+  opacity: 1;
 
   .total-banner {
     background-color: #fcf8e3;
@@ -156,8 +202,15 @@
       --border-radius: 6px;
     }
 
-    .btn-confirm {
+    .btn-konfirmasi {
       --background: #4caf50;
+      --color: #ffffff;
+    }
+
+    .btn-batal {
+      --background: #ffffff;
+      --color: #555555;
+      --border-color: #888888;
     }
   }
 }

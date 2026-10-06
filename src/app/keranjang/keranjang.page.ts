@@ -50,8 +50,6 @@ export class KeranjangPage implements OnInit {
     return 'Rp ' + Number(price).toLocaleString('id-ID');
   }
 
-  
-
   onSearchChange() {
     const keyword = this.searchKeyword.trim();
     if (keyword === '') {
@@ -72,6 +70,7 @@ export class KeranjangPage implements OnInit {
 
     const result = this.cartService.addToCart(product, 1);
     if (result.success) {
+      this.cartItems = this.cartService.getCart();
       this.searchKeyword = '';
       this.searchResults = [];
       this.hasSearched = false;
@@ -94,6 +93,7 @@ export class KeranjangPage implements OnInit {
 
   removeItem(productId: any) {
     this.cartService.removeFromCart(productId);
+  this.cartItems = this.cartService.getCart();
   }
 
   async cancelTransaction() {
@@ -110,6 +110,7 @@ export class KeranjangPage implements OnInit {
           handler: () => {
             this.cartService.clearCart();
             this.showToast('Transaksi dibatalkan.', 'danger');
+            this.router.navigate(['/home']);
           }
         }
       ]
