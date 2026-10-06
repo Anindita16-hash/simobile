@@ -1,0 +1,48 @@
+ion-card-title {
+  min-width: 0;
+}
+
+.product-detail {
+    display: flex;
+    align-items: stretch;
+}
+
+.image-container {
+    width: 40%;
+    max-width: 800px;
+    background-color: #F1F1F1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.product-info {
+    flex: 1;
+}
+
+.quantity {
+    border-top: 1px solid #CCCCCC;
+    border-bottom: 1px solid #CCCCCC;
+    margin-bottom: 16px;
+}
+
+.ten-text {
+    font-size: small;
+    color: black;
+}
+
+.price-text {
+    font-size: medium;
+    color: black;
+}
+
+hr {
+    margin-top: 16px;
+    border-bottom: 1px solid #CCCCCC;
+}

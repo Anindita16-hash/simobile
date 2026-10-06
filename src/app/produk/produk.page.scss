@@ -1,3 +1,7 @@
+.search-bar {
+    margin-top: 16px;
+}
+
 .product-row {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -11,11 +15,16 @@
     object-fit: contain;
 }
 
+.ten-text {
+    font-size: small;
+    color: black;
+}
+
 .btn-tambah-produk {
   position: fixed;
-  bottom: 80px;
-  right: 24px;
-  z-index: 10;
+  bottom: 16px;
+  right: 20px;
+  //z-index: 10;
 
   --border-radius: 50%;
   width: 56px;

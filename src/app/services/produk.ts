@@ -8,7 +8,7 @@ export class Produk {
 
     defaultImage = "assets/image/default.png";
 
-    category = [
+    categories = [
         { id: "C001", name: "Sembako" },
         { id: "C002", name: "Bahan Masak & Bumbu" },
         { id: "C003", name: "Makanan Beku" },
@@ -24,7 +24,7 @@ export class Produk {
             url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSckxmRUzzTdJPd4zU0d2W3Y_GoQac1PM2cLIrf9G_FKy_rC_xAdlYyht6G&s=10",
             quantity: "5000gr",
             description: "",
-            category: "Sembako",
+            category: "C001",
             brand: "Merdeka",
             stock: 15,
             buyPrice: 74500,
@@ -36,7 +36,7 @@ export class Produk {
             url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSztqJDXQ6VzkjKIPpkcwpa-mJlRVB-nfDKKM-y1PTj715IaQ7USj0B79ys&s=10",
             quantity: "500gr",
             description: "",
-            category: "Sembako",
+            category: "C001",
             brand: "1945",
             stock: 5,
             buyPrice: 8500,
@@ -48,7 +48,7 @@ export class Produk {
             url: "https://akcdn.detik.net.id/visual/2024/12/31/ketahui-perbedaan-telur-biasa-dan-telur-omega-untuk-mpasi-anak_169.jpeg?",
             quantity: "10 butir",
             description: "",
-            category: "Sembako",
+            category: "C001",
             brand: "178",
             stock: 20,
             buyPrice: 28000,
@@ -60,7 +60,7 @@ export class Produk {
             url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpkVSqAdYxEq1PF6aC92cBDB-RppeEwuh8-ss9sOVRvLZnF6kghBpfN-0&s=10",
             quantity: "45gr",
             description: "",
-            category: "Bahan Masak & Bumbu",
+            category: "C002",
             brand: "Lezat",
             stock: 50,
             buyPrice: 2300,
@@ -72,7 +72,7 @@ export class Produk {
             url: "https://media.suara.com/pictures/653x366/2021/03/25/18530-ilustrasi-sosis.webp",
             quantity: "65gr",
             description: "",
-            category: "Makanan Beku",
+            category: "C003",
             brand: "Salsus",
             stock: 30,
             buyPrice: 7500,
@@ -84,7 +84,7 @@ export class Produk {
             url: "https://saltandbaker.com/wp-content/uploads/2019/10/Homemade-Vanilla-Ice-cream-6.jpg",
             quantity: "700ml",
             description: "",
-            category: "Makanan Beku",
+            category: "C003",
             brand: "Eskim",
             stock: 5,
             buyPrice: 23500,
@@ -96,7 +96,7 @@ export class Produk {
             url: "https://images.alodokter.com/dk0z4ums3/image/upload/v1770794737/attached_image/air-mineral-yang-baik-untuk-kesehatan.jpg",
             quantity: "1500ml",
             description: "",
-            category: "Minuman",
+            category: "C004",
             brand: "Desa",
             stock: 100,
             buyPrice: 5100,
@@ -108,7 +108,7 @@ export class Produk {
             url: "https://img.magnific.com/premium-photo/two-cups-tea-with-lemon-sliced-lemon-bowl-honey-wooden-table-vitamin-warming-drink-vertical-view_107288-4669.jpg?semt=ais_hybrid&w=740&q=80",
             quantity: "350ml",
             description: "",
-            category: "Minuman",
+            category: "C004",
             brand: "The",
             stock: 20,
             buyPrice: 2700,
@@ -120,7 +120,7 @@ export class Produk {
             url: "https://d1vbn70lmn1nqe.cloudfront.net/prod/wp-content/uploads/2025/08/06124055/pembersih-lantai.jpg",
             quantity: "800ml",
             description: "",
-            category: "Perawatan Rumah",
+            category: "C005",
             brand: "Spotless",
             stock: 15,
             buyPrice: 10900,
@@ -132,7 +132,7 @@ export class Produk {
             url: "https://image.made-in-china.com/202f0j00BRnUIPCKZoqz/Cheap-White-Plain-Post-Envelope.webp",
             quantity: "20 lembar",
             description: "",
-            category: "Alat Tulis",
+            category: "C006",
             brand: "Garuda",
             stock: 10,
             buyPrice: 2500,
@@ -165,8 +165,6 @@ export class Produk {
         if (index !== -1) {
             this.products[index] = product;
         }
-        //punya kak Geuss
-        //this.products[this.searchProductByID(id).id] = product;
     }
 
     searchProductByName(keyword: string) {
@@ -189,6 +187,16 @@ export class Produk {
         }
 
         return null;
+    }
+
+    getCategoryName(id: string): string {
+        for (let i = 0; i < this.categories.length; i++) {
+            if (this.categories[i].id === id) {
+                return this.categories[i].name;
+            }
+        }
+
+        return "";
     }
 
     updateStock(id: number, quantity: number) { // can add or subtract, for subtract use negative amount
