@@ -7,5 +7,13 @@ import { Component } from '@angular/core';
   standalone: false,
 })
 export class AppComponent {
-  constructor() {}
+  isDark: boolean = false;
+  constructor() {
+    this.isDark = document.body.classList.contains('dark');
+  }
+  toggleTheme(event: any) {
+    const isChecked = event.detail.checked;
+    document.body.classList.toggle('dark', isChecked);
+    this.isDark = isChecked;
+  }
 }

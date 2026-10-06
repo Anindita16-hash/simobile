@@ -16,10 +16,22 @@
 
         <!--Pengaturan-->
         <!--Dropdown-->
-        <ion-item>
-          <ion-icon name="settings" slot="start"></ion-icon>
-          <ion-label>Pengaturan</ion-label>
-        </ion-item>
+        <ion-accordion-group>
+          <ion-accordion value="pengaturan">
+            <ion-item slot="header">
+              <ion-icon name="settings" slot="start"></ion-icon>
+              <ion-label>Pengaturan</ion-label>
+            </ion-item>
+            
+            <div class="ion-padding" slot="content">
+              <ion-item>
+                <ion-icon name="moon" slot="start"></ion-icon>
+                <ion-label>Dark Mode</ion-label>
+                <ion-toggle [checked]="isDark" (ionChange)="toggleTheme($event)" slot="end"></ion-toggle>
+              </ion-item>
+            </div>
+          </ion-accordion>
+        </ion-accordion-group>
 
         <!--Tentang-->
         <ion-item routerLink="/tentang" menuClose>
