@@ -1,0 +1,30 @@
+.list-header {
+  padding: 16px;
+  font-size: 18px;
+}
+
+.item-subtotal {
+  margin-left: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: right;
+  white-space: nowrap;
+}
+
+.price-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  margin-top: 8px;
+}
+
+.total-label {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.total-price {
+  font-size: 20px;
+  font-weight: bold;
+}

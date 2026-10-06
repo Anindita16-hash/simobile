@@ -21,102 +21,46 @@
     </ion-toolbar>
   </ion-header>
 
-  <!-- Header nota -->
-  <!-- data dummy temporary -->
-  <div class="header-nota">
-    <ion-icon name="receipt-outline" size="large"></ion-icon>
-    <h1>Transaksi #{{ idTransaksi }}</h1>
-    <p>Tanggal: 4 Oktober 2026, 17:30</p>
+  <!--if transaction found-->
+  <div class="header-nota" *ngIf="transaction">
+    <h1>Transaksi #{{ transaction.id }}</h1>
+    <p>Tanggal: {{ transaction.date }}</p>
   </div>
-
-  <ion-list inset="true">
-
-    <ion-list-header>
-      <ion-label>Daftar Barang</ion-label>
-    </ion-list-header>
-
-    <!-- Barang 1 -->
-    <ion-item>
-      <ion-label>
-        <h3>Kopi Arabika</h3>
-        <p>2 x Rp. 25.000</p>
-      </ion-label>
-
-      <ion-note slot="end">
-        Rp. 50.000
-      </ion-note>
-    </ion-item>
-
-    <!-- Barang 2 -->
-    <ion-item>
-      <ion-label>
-        <h3>Roti Cokelat</h3>
-        <p>1 x Rp. 20.000</p>
-      </ion-label>
-
-      <ion-note slot="end">
-        Rp. 20.000
-      </ion-note>
-    </ion-item>
-
-    <!-- Barang 3 -->
-    <ion-item>
-      <ion-label>
-        <h3>Air Mineral</h3>
-        <p>3 x Rp. 5.000</p>
-      </ion-label>
-
-      <ion-note slot="end">
-        Rp. 15.000
-      </ion-note>
-    </ion-item>
-
-  </ion-list>
-
-  <!-- Total keseluruhan -->
-  <ion-item lines="none" class="price-total">
-    <ion-label>
-      <h1>Total: Rp. 85.000</h1>
-    </ion-label>
-  </ion-item>
-
-
-  <!--
-    PLACEHOLDER / TEMPLATE DATA DINAMIS
-
-    <div class="header-nota">
-      <ion-icon name="receipt-outline" size="large"></ion-icon>
-      <h1>Transaksi #=ID TRANSAKSI=</h1>
-      <p>Tanggal: =TANGGAL TRANSAKSI=</p>
+  
+  <!--Daftar barang-->
+  <ion-list inset="true" *ngIf="transaction">
+    <div class="list-header">
+      <strong>Daftar Barang</strong>
     </div>
 
-    <ion-list inset="true">
-      <ion-list-header>
-        <ion-label>Daftar Barang</ion-label>
-      </ion-list-header>
-
-      Daftar item terjual
-
-      <ion-item>
-        <ion-label>
-          <h3>=NAMA PRODUK=</h3>
-          <p>=KUANTITAS= x Rp. =HARGA SATUAN=</p>
-        </ion-label>
-
-        <ion-note slot="end">
-          Rp. =SUBTOTAL=
-        </ion-note>
-      </ion-item>
-
-    </ion-list>
-
-    Total keseluruhan
-
-    <ion-item lines="none" class="price-total">
+    <ion-item *ngFor="let item of transaction.item">
       <ion-label>
-        <h1>Total: Rp. =TOTAL TRANSAKSI=</h1>
+        <h3>{{ item.name }}</h3>
+        <p>{{ item.quantity }} x Rp. {{ item.price | number }}</p>
       </ion-label>
+
+      <!--subtotoal-->
+      <div class="item-subtotal">
+        Rp. {{ item.quantity * item.price | number }}
+      </div>
     </ion-item>
-  -->
+  </ion-list>
+
+  <!--Total all-->
+  <div class="price-total" *ngIf="transaction">
+    <div class="total-label">
+      Total
+    </div>
+
+    <div class="total-price">
+      Rp. {{ transaction.total | number }}
+    </div>
+  </div>
+
+  <!--transaction not found-->
+  <div class="empty-state" *ngIf="!transaction">
+    <ion-icon name="receipt-outline" size="large"></ion-icon>
+    <p>Transaksi tidak ditemukan.</p>
+  </div>
 
 </ion-content>

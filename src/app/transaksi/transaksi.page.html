@@ -19,33 +19,21 @@
   </ion-header>
 
   <!--Default display saat belum ada transaksi-->
-  <div class="default-state">
+  <div class="empty-state" *ngIf="history.length === 0">
     <ion-icon name="receipt-outline" size="large"></ion-icon>
     <p>Belum ada riwayat transaksi.</p>
   </div>
 
   <!--List item transaksi-->
-  <!--data dummy temporary-->
-  <ion-list>
-  <ion-item button detail="true" routerLink="/transaksi/transaksi-detail/1001">
-    <ion-label>
-      <h2>Transaksi #1001</h2>
-      <p>Tanggal: 4 Oktober 2026, 17:30</p>
-      <p><strong>Total: Rp. 85.000</strong></p>
-    </ion-label>
-  </ion-item>
-</ion-list>
-
-<!--placeholder
-  <ion-list>
-
-    <ion-item button detail="true" routerLink="/transaksi-detail/=ID TRANSAKSI=">
+  <ion-list *ngIf="history.length > 0">
+    <ion-item button detail="true" *ngFor="let trx of history"
+      [routerLink]="['/transaksi/transaksi-detail', trx.id]">
       <ion-label>
-        <h2>Transaksi #=ID TRANSAKSI=</h2>
-        <p>Tanggal: =TANGGAL TRANSAKSI=</p>
-        <p><strong>Total: Rp. =TOTAL TRANSAKSI=</strong></p>
+        <h2>Transaksi #{{ trx.id }}</h2>
+        <p>Tanggal: {{ trx.date }}</p>
+        <p><strong>Total: Rp. {{ trx.total | number }}</strong></p>
       </ion-label>
     </ion-item>
   </ion-list>
--->
+
 </ion-content>
