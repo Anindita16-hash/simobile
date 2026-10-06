@@ -21,8 +21,12 @@
   <!--search bar-->
   <ion-list lines="full">
     <ion-item>
-      <ion-input labelPlacement="floating" label="Cari Produk" [(ngModel)]="keyword" (keyup)="filter()"></ion-input>
+      <ion-input labelPlacement="floating" label="Cari Produk" [(ngModel)]="keyword" (keyup)="filter()" (ionFocus)="searchFocus = true" (ionBlur)="searchFocus = false"></ion-input>
     </ion-item>
+
+    <ng-container *ngIf="searchFocus">
+      <ion-item *ngFor="let product of products" (mousedown)="setInput(product.name)">{{ product.name }}</ion-item>
+    </ng-container>
   </ion-list>
 
   <!--empty state default-->
@@ -53,11 +57,11 @@
               <ion-button *ngIf="!isInCart(product)" (click)="addToCart(product)">Tambah ke Keranjang</ion-button>
               <div class="row-flex" *ngIf="isInCart(product)">
                 <div class="qty-controller">
-                  <ion-button fill="clear" size="large">
+                  <ion-button fill="clear" size="large" (click)="subtractQuantity()">
                     <ion-icon name="remove-circle-outline"></ion-icon>
                   </ion-button>
                   <span>{{ quantity }}</span>
-                  <ion-button fill="clear" size="large">
+                  <ion-button fill="clear" size="large" (click)="addQuantity()">
                     <ion-icon name="add-circle-outline"></ion-icon>
                   </ion-button>
                 </div>

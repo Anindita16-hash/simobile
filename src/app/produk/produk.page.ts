@@ -13,6 +13,8 @@ export class ProdukPage implements OnInit {
   defaultImage: string = "";
 
   keyword: string = "";
+  searchFocus: boolean = false;
+
   gridColumn: number = 3;
 
   // temp
@@ -23,6 +25,12 @@ export class ProdukPage implements OnInit {
   ngOnInit() {
     this.products = this.produk.products;
     this.defaultImage = this.produk.defaultImage;
+  }
+
+  setInput(name: string) {
+    this.keyword = name;
+    this.searchFocus = false;
+    this.filter()
   }
 
   chunkArray(arr_ori: any[], chunkSize: number): any[][] {
@@ -46,6 +54,15 @@ export class ProdukPage implements OnInit {
   isInCart(product: any) {
     if (this.quantity < 1) return false;
     else return true;
+  }
+
+  // temp!! sampai bawah!!
+  addQuantity() {
+    this.quantity++;
+  }
+
+  subtractQuantity() {
+    this.quantity--;
   }
 
   addToCart(product: any) {
