@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Profil } from '../../services/profil';
 
 @Component({
   selector: 'app-profil',
@@ -7,10 +8,12 @@ import { Component, OnInit } from '@angular/core';
   standalone: false,
 })
 export class ProfilPage implements OnInit {
-
-  constructor() { }
+  profiles: any[] = [];
+  
+  constructor(private profilService: Profil) { }
 
   ngOnInit() {
+    this.profiles = this.profilService.profiles;
   }
 
 }
