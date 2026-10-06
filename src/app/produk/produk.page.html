@@ -39,8 +39,8 @@
   <ion-grid>
     <ion-row class="product-row" *ngFor="let products2 of chunkArray(products, gridColumn); let i = index">
       <ion-col *ngFor="let product of products2; let i2 = index">
-        <ion-card button [routerLink]="['/produk/produk-detail', (i*2+i2)]">
-          <ion-img [src]="product.url == '' ? defaultImage : product.url" class="product-image"
+        <ion-card button [routerLink]="['/produk/produk-detail', product.id]">
+          <ion-img [src]="product.url === '' ? defaultImage : product.url" class="product-image"
             alt="product.name"></ion-img>
           <ion-card-header>
             <div class="row-flex">
@@ -54,7 +54,7 @@
           <ion-card-content>
             <div class="row-flex">
               <ion-label class="product-price">{{ formatPrice(product.sellPrice) }}</ion-label>
-              <ion-button *ngIf="!isInCart(product)" (click)="addToCart(product)">Tambah ke Keranjang</ion-button>
+              <ion-button *ngIf="!isInCart(product)" (click)="addToCart(product)" [disabled]="product.stock === 0">Tambah ke Keranjang</ion-button>
               <div class="row-flex" *ngIf="isInCart(product)">
                 <div class="qty-controller">
                   <ion-button fill="clear" size="large" (click)="subtractQuantity()">

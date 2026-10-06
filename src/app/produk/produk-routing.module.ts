@@ -7,8 +7,9 @@ const routes: Routes = [
   {
     path: '',
     component: ProdukPage
-  },  {
-    path: 'produk-detail',
+  },
+  {
+    path: 'produk-detail/:id',
     loadChildren: () => import('./produk-detail/produk-detail.module').then( m => m.ProdukDetailPageModule)
   },
   {
