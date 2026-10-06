@@ -1,5 +1,6 @@
 .search-bar {
     margin-top: 16px;
+    margin-bottom: -16px;
 }
 
 .product-row {
@@ -21,12 +22,38 @@
 }
 
 .btn-tambah-produk {
-  position: fixed;
-  bottom: 16px;
-  right: 20px;
-  //z-index: 10;
+    position: fixed;
+    bottom: 16px;
+    right: 20px;
+    z-index: 10;
 
-  --border-radius: 50%;
-  width: 56px;
-  height: 56px;
+    --border-radius: 50%;
+    width: 56px;
+    height: 56px;
+
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.num-up-down {
+    display: flex;
+    align-items: center;
+    gap: 1px;
+
+    ion-button {
+        height: 44px;
+        min-height: 44px;
+        --padding-start: 4px;
+        --padding-end: 4px;
+        --padding-top: 4px;
+        --padding-bottom: 4px;
+        min-width: 0;
+        margin: 0;
+    }
+
+    span {
+        min-width: 20px;
+        text-align: center;
+        font-weight: 500;
+    }
 }

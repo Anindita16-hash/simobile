@@ -15,6 +15,10 @@ const routes: Routes = [
   {
     path: 'produk-form',
     loadChildren: () => import('./produk-form/produk-form.module').then( m => m.ProdukFormPageModule)
+  },
+  {
+    path: 'produk-form/:id',
+    loadChildren: () => import('./produk-form/produk-form.module').then( m => m.ProdukFormPageModule)
   }
 
 ];

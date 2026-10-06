@@ -18,7 +18,7 @@ export class ProdukDetailPage implements OnInit {
   quantity: number = 0;
   stockToAdd: number = 0;
 
-  constructor(private route: ActivatedRoute, private produk: Produk) { }
+  constructor(private route: ActivatedRoute, public produk: Produk) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -30,7 +30,7 @@ export class ProdukDetailPage implements OnInit {
   }
 
   formatPrice(price: number) {
-    return "Rp. " + price.toLocaleString('id-ID');
+    return 'Rp. ' + (price ? price.toLocaleString('id-ID') : '0');
   }
 
   isInCart(product: any) {
@@ -44,11 +44,15 @@ export class ProdukDetailPage implements OnInit {
   }
 
   addQuantityCart(amount: number = 1) {
-    this.quantity += amount;
+    let total = this.quantity + amount;
+    if (total > this.product.stock) this.quantity = this.product.stock;
+    else this.quantity = total;
   }
 
   subtractQuantityCart(amount: number = 1) {
-    this.quantity -= amount;
+    let total = this.quantity - amount;
+    if (total < 0) this.quantity = 0;
+    else this.quantity = total;
   }
   // sampai sini!!
 
@@ -61,6 +65,8 @@ export class ProdukDetailPage implements OnInit {
   }
 
   subtractQuantityStock(amount: number = 1) {
-    this.stockToAdd -= amount;
+    let total = this.stockToAdd - amount;
+    if (total < 0) this.stockToAdd = 0;
+    else this.stockToAdd = total;
   }
 }

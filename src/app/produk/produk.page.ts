@@ -65,11 +65,15 @@ export class ProdukPage implements OnInit {
     this.quantity += 1;
   }
 
-  addQuantity(amount: number = 1) {
-    this.quantity += amount;
+  addQuantity(product: any, amount: number = 1) {
+    let total = this.quantity + amount;
+    if (total > product.stock) this.quantity = product.stock;
+    else this.quantity = total;
   }
 
   subtractQuantity(amount: number = 1) {
-    this.quantity -= amount;
+    let total = this.quantity - amount;
+    if (total < 0) this.quantity = 0;
+    else this.quantity = total;
   }
 }

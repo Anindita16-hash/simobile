@@ -29,6 +29,7 @@ export class Produk {
             stock: 15,
             buyPrice: 74500,
             sellPrice: 83900,
+            profit: 9400,
         },
         {
             id: "P002",
@@ -41,6 +42,7 @@ export class Produk {
             stock: 5,
             buyPrice: 8500,
             sellPrice: 15000,
+            profit: 6500,
         },
         {
             id: "P003",
@@ -53,6 +55,7 @@ export class Produk {
             stock: 20,
             buyPrice: 28000,
             sellPrice: 33600,
+            profit: 5600,
         },
         {
             id: "P004",
@@ -65,6 +68,7 @@ export class Produk {
             stock: 50,
             buyPrice: 2300,
             sellPrice: 4500,
+            profit: 2200,
         },
         {
             id: "P005",
@@ -77,6 +81,7 @@ export class Produk {
             stock: 30,
             buyPrice: 7500,
             sellPrice: 8800,
+            profit: 1300,
         },
         {
             id: "P006",
@@ -89,6 +94,7 @@ export class Produk {
             stock: 5,
             buyPrice: 23500,
             sellPrice: 35000,
+            profit: 11500,
         },
         {
             id: "P007",
@@ -101,6 +107,7 @@ export class Produk {
             stock: 100,
             buyPrice: 5100,
             sellPrice: 9900,
+            profit: 4800,
         },
         {
             id: "P008",
@@ -113,6 +120,7 @@ export class Produk {
             stock: 20,
             buyPrice: 2700,
             sellPrice: 3500,
+            profit: 800,
         },
         {
             id: "P009",
@@ -125,6 +133,7 @@ export class Produk {
             stock: 15,
             buyPrice: 10900,
             sellPrice: 13100,
+            profit: 22000,
         },
         {
             id: "P010",
@@ -137,6 +146,7 @@ export class Produk {
             stock: 10,
             buyPrice: 2500,
             sellPrice: 4500,
+            profit: 2000,
         }
     ];
 
@@ -156,7 +166,8 @@ export class Produk {
             brand: p_brand,
             stock: p_stock,
             buyPrice: p_bprice,
-            sellPrice: p_sprice
+            sellPrice: p_sprice,
+            profit: p_sprice - p_bprice,
         });
     }
 

@@ -54,8 +54,8 @@
               <ion-label class="product-price">{{ formatPrice(product.sellPrice) }}</ion-label>
 
               <ion-button *ngIf="!isInCart(product)" (mousedown)="addToCart(product)" [disabled]="product.stock === 0"
-                color="tertiary">Tambah ke Keranjang</ion-button>
-              <div class="qty-controller" *ngIf="isInCart(product)">
+                color="tertiary"><ion-icon name="cart"></ion-icon></ion-button>
+              <div class="num-up-down" *ngIf="isInCart(product)">
                 <ion-button *ngIf="quantity > 10" fill="clear" size="large" (mousedown)="subtractQuantity(10)">
                   <ion-icon name="remove-circle-outline"></ion-icon><span class="ten-text">10</span>
                 </ion-button>
@@ -63,10 +63,10 @@
                   <ion-icon name="remove-circle-outline"></ion-icon>
                 </ion-button>
                 <span>{{ quantity }}</span>
-                <ion-button fill="clear" size="large" (mousedown)="addQuantity()">
+                <ion-button fill="clear" size="large" (mousedown)="addQuantity(product)">
                   <ion-icon name="add-circle-outline"></ion-icon>
                 </ion-button>
-                <ion-button fill="clear" size="large" (mousedown)="addQuantity(10)">
+                <ion-button fill="clear" size="large" (mousedown)="addQuantity(product, 10)">
                   <ion-icon name="add-circle-outline"></ion-icon><span class="ten-text">10</span>
                 </ion-button>
               </div>
