@@ -76,10 +76,10 @@ Informasi produk yang dapat diisi:
 
 Aplikasi menyediakan validasi pada setiap bagian yang perlu diperbaiki, misalnya:
 
+* `Kategori produk wajib dipilih`
 * `Nama produk wajib diisi`
 * `Harga beli tidak boleh 0`
 * `Harga jual tidak boleh 0`
-* `Jumlah stok tidak boleh 0`
 
 ### Keranjang dan Transaksi
 
