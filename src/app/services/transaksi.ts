@@ -444,8 +444,6 @@ export class Transaksi {
     const listItem: any[] = [];
 
     items.forEach(item => {
-      const itemProfit = (item.product.sellPrice - item.product.buyPrice) * item.qty
-
       listItem.push({
         product: {
           id: item.product.id,
@@ -454,9 +452,9 @@ export class Transaksi {
           net: item.product.net,
           buyPrice: item.product.buyPrice,
           sellPrice: item.product.sellPrice,
-          profit: itemProfit,
+          profit: item.product.sellPrice - item.product.buyPrice,
         },
-        quantity: item.qty,
+        qty: item.qty,
         subtotal: item.subtotal,
       });
     });
@@ -485,6 +483,8 @@ export class Transaksi {
     transaction.item.forEach((item: { product: { profit: number; }; qty: number; }) => {
       grandProfit += item.product.profit * item.qty;
     });
+
+    console.log(transaction.item);
 
     return grandProfit;
   }
