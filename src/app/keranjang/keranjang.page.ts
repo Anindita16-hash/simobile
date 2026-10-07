@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController, AlertController } from '@ionic/angular';
 import { Keranjang } from '../services/keranjang';
@@ -23,7 +23,8 @@ export class KeranjangPage implements OnInit {
     private router: Router,
     private toastController: ToastController,
     private alertController: AlertController,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private ngZone: NgZone
   ) { }
 
   ngOnInit() { }
@@ -128,9 +129,15 @@ export class KeranjangPage implements OnInit {
           text: 'Ya',
           role: 'confirm',
           handler: () => {
-            this.cartService.clearCart();
-            this.showToast('Transaksi dibatalkan.', 'danger');
-            this.router.navigate(['/home']);
+            // Handler alert Ionic berjalan di luar Angular zone, sehingga
+            // navigasi + toast di bawahnya tidak memicu change detection
+            // (halaman tujuan tampak tidak terupdate sampai ada interaksi).
+            // ngZone.run() menjamin semuanya jalan di dalam zone.
+            this.ngZone.run(() => {
+              this.cartService.clearCart();
+              this.showToast('Transaksi dibatalkan.', 'danger');
+              this.router.navigate(['/home']);
+            });
           }
         }
       ]
@@ -150,16 +157,21 @@ export class KeranjangPage implements OnInit {
           text: 'Ya',
           role: 'confirm',
           handler: () => {
-            const savedTx = this.cartService.confirmTransaction();
-            if (savedTx) {
-              // Reset state pencarian kembali ke mode default
-              this.resetPage();
+            // Lihat catatan ngZone pada cancelTransaction di atas:
+            // tanpa ini, halaman Riwayat/Dashboard tujuan kadang
+            // tidak langsung terupdate setelah konfirmasi.
+            this.ngZone.run(() => {
+              const savedTx = this.cartService.confirmTransaction();
+              if (savedTx) {
+                // Reset state pencarian kembali ke mode default
+                this.resetPage();
 
-              this.showToast(`Transaksi ${savedTx.id} berhasil dikonfirmasi!`, 'success');
+                this.showToast(`Transaksi ${savedTx.id} berhasil dikonfirmasi!`, 'success');
 
-              // Pindah ke riwayat transaksi
-              this.router.navigate(['/transaksi']);
-            }
+                // Pindah ke riwayat transaksi
+                this.router.navigate(['/transaksi']);
+              }
+            });
           }
         }
       ]

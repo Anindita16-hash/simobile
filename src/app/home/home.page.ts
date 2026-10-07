@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Transaksi } from '../services/transaksi';
 import { Profil } from '../services/profil';
 
@@ -22,16 +22,25 @@ export class HomePage implements OnInit {
 
   constructor(
     private transaksiService: Transaksi,
-    private profilService: Profil
+    private profilService: Profil,
+    private cdr: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
     this.loadDashboard();
   }
 
-  // Refresh tiap halaman dibuka > transaksibaru dikonfirmasi langsung masuk laporan
+  // Refresh tiap halaman dibuka > transaksibaru dikonfirmasi langsung masuk laporan.
+  // detectChanges() memaksa render walau navigasi pemicunya berasal dari
+  // luar Angular zone (mis. handler alert konfirmasi keranjang).
   ionViewWillEnter() {
     this.loadDashboard();
+    this.cdr.detectChanges();
+  }
+
+  ionViewDidEnter() {
+    this.loadDashboard();
+    this.cdr.detectChanges();
   }
 
   loadDashboard() {

@@ -9,7 +9,9 @@
     <ion-content class="ion-padding">
       <ion-list>
         <!--Profil-->
-        <ion-item routerLink="/profil" menuClose>
+        <!-- menuToggle (bukan menuClose — sintaks Ionic v3 yang sudah tidak
+             berfungsi): menutup side menu otomatis setelah opsi ditekan -->
+        <ion-item routerLink="/profil" menuToggle>
           <ion-icon name="person" slot="start"></ion-icon>
           <ion-label>Profil</ion-label>
         </ion-item>
@@ -34,13 +36,13 @@
         </ion-accordion-group>
 
         <!--Tentang-->
-        <ion-item routerLink="/tentang" menuClose>
+        <ion-item routerLink="/tentang" menuToggle>
           <ion-icon name="information-circle" slot="start"></ion-icon>
           <ion-label>Tentang</ion-label>
         </ion-item>
 
         <!--Logout-->
-        <ion-item routerLink="/logout" menuClose>
+        <ion-item routerLink="/logout" menuToggle>
           <ion-icon name="power" slot="start"></ion-icon>
           <ion-label>Logout</ion-label>
         </ion-item>
