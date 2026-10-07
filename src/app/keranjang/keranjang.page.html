@@ -8,6 +8,13 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+<!--debug-->
+<p style="color: red; font-size: 20px;">
+  PAGE: {{ cartItems.length }} item | {{ totalPrice }}
+  <br>
+  SERVICE: {{ cartService.cartItems.length }} item | {{ cartService.getTotalPrice() }}
+</p>
+
 
   <!-- SEARCH BAR PENCARIAN CEPAT -->
   <div class="search-container">
@@ -45,7 +52,7 @@
   </div>
 
   <!-- KONDISI KERANJANG KOSONG -->
-  <div class="empty-cart-container ion-text-center" *ngIf="cartItems.length === 0">
+  <div class="empty-cart-container ion-text-center" *ngIf="cartService.cartItems.length === 0">
     <ion-icon name="cart-outline" class="empty-cart-icon"></ion-icon>
     <p class="empty-cart-text">Keranjang masih kosong</p>
   </div>

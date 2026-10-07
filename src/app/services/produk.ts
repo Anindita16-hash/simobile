@@ -222,9 +222,10 @@ export class Produk {
     }
 
     updateStock(id: string, quantity: number) { // can add or subtract, for subtract use negative amount
-        const product = this.searchProductByID(id);
+        let product = this.searchProductByID(id);
 
-        if (product.stock + quantity >= 0) product.stock += quantity;
-        else product.stock = 0;
+        if (product !== null) {
+            product.stock += quantity;
+        }
     }
 }

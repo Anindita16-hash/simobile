@@ -26,7 +26,12 @@ export class KeranjangPage implements OnInit {
     private alertController: AlertController
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    console.log('=== KERANJANG SERVICE INSTANCE ===');
+  console.log(this.cartService);
+  console.log('cartItems:', this.cartService.cartItems);
+
+  }
 
   // Lifecycle Hook Ionic: Dipanggil setiap kali tab Keranjang dibuka
   ionViewWillEnter() {
@@ -36,6 +41,14 @@ export class KeranjangPage implements OnInit {
   // Fungsi untuk mengembalikan halaman ke kondisi default (kosong)
   resetPage() {
     this.cartItems = this.cartService.getCart(); // mengambil array []
+    
+    // debug
+    console.log('=== KERANJANG PAGE DEBUG ===');
+  console.log('CartService cartItems:', this.cartService.cartItems);
+  console.log('KeranjangPage cartItems:', this.cartItems);
+  console.log('Cart total:', this.cartService.getTotalPrice());
+
+    
     this.searchKeyword = '';
     this.searchResults = [];
     this.hasSearched = false;
@@ -80,20 +93,37 @@ export class KeranjangPage implements OnInit {
   }
 
   getQuantity(item: any): number {
-    const index = this.cartService.cartItems.findIndex(i => i.product.id === item.id);
-    return this.cartService.cartItems[index]?.qty || 1;
+    //const index = this.cartService.cartItems.findIndex(i => i.product.id === item.id);
+    //return this.cartService.cartItems[index]?.qty || 1;
+
+    return item.qty || 1;
   }
 
   increaseQty(item: any) {
-    const result = this.cartService.updateQuantity(item.product.id, 1);
+    /*const result = this.cartService.updateQuantity(item.product.id, 1);
     if (!result.success) {
       this.showToast(result.message || 'Jumlah melebihi stok tersedia', 'warning');
-    }
+    }*/
+    const result = this.cartService.updateQuantity(item.product.id, 1);
+
+    if (!result.success) {
+      this.showToast(result.message || 'Jumlah melebihi stok tersedia', 'warning');
+      return;
+  }
+
+  this.cartItems = this.cartService.getCart();
+   
   }
 
   decreaseQty(item: any) {
     if (item.qty <= 1) return;
-    this.cartService.updateQuantity(item.product.id, -1);
+    //this.cartService.updateQuantity(item.product.id, -1);
+
+    const result = this.cartService.updateQuantity(item.product.id, -1);
+
+    if (result.success) {
+      this.cartItems = this.cartService.getCart();
+    }
   }
 
   removeItem(productId: any) {

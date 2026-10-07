@@ -50,10 +50,38 @@ export class ProdukDetailPage implements OnInit {
 
   addToCart(product: any) {
     this.keranjang.addToCart(product);
+
+    // debugging
+    console.log('=== PRODUCT DETAIL SERVICE ===');
+  console.log('CartService instance:', this.keranjang);
+  console.log('Cart items:', this.keranjang.cartItems);
+  console.log('Cart total:', this.keranjang.getTotalPrice());
+
+    
+    console.log('Cart after add:', this.keranjang.cartItems);
+    console.log('Cart total:', this.keranjang.getTotalPrice());
+
+      console.log('=== CART DEBUG ===');
+  console.log('Quantity:', this.keranjang.cartItems[0]?.qty);
+  console.log('Subtotal:', this.keranjang.cartItems[0]?.subtotal);
+  console.log('Price:', this.keranjang.cartItems[0]?.product.sellPrice);
+  console.log('Total:', this.keranjang.getTotalPrice());
   }
 
   updateQuantity(product: any, amount: number = 1) {
-    this.keranjang.updateQuantity(product.id, amount);
+    // this.keranjang.updateQuantity(product.id, amount);
+
+    //debug
+    console.log('BUTTON PRESSED');
+  console.log('Product:', product.name);
+  console.log('Amount:', amount);
+
+  const result = this.keranjang.updateQuantity(product.id, amount);
+
+  console.log('CartService result:', result);
+  console.log('Cart quantity:', this.keranjang.cartItems[0]?.qty);
+  console.log('Cart subtotal:', this.keranjang.cartItems[0]?.subtotal);
+  console.log('Cart total:', this.keranjang.getTotalPrice());
   }
 
   removeItem(id: string) {
@@ -75,7 +103,10 @@ export class ProdukDetailPage implements OnInit {
   }
 
   saveStockToAdd(product: any) {
+    // find product, if exist add
     this.produk.updateStock(product.id, this.stockToAdd);
+
+    // reset temporary stock counter
     this.stockToAdd = 0;
-  }
+    }
 }
