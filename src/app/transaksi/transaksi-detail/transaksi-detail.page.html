@@ -36,11 +36,11 @@
     <ion-item *ngFor="let item of transaction.item">
       <ion-label>
         <h3>{{ item.product?.name || item.name }}</h3>
-    <p>{{ item.qty ?? item.quantity }} x Rp. {{ (item.product?.sellPrice ?? item.price) | number }}</p>
-  </ion-label>
+        <p>{{ item.qty ?? item.quantity }} x Rp. {{ (item.product?.sellPrice ?? item.price) | number }}</p>
+      </ion-label>
 
-  <div class="item-subtotal">
-    Rp. {{ item.subtotal ?? ((item.qty ?? item.quantity) * (item.product?.sellPrice ?? item.price)) | number }}
+      <div class="item-subtotal">
+        Rp. {{ item.subtotal ?? ((item.qty ?? item.quantity) * (item.product?.sellPrice ?? item.price)) | number }}
       </div>
     </ion-item>
   </ion-list>

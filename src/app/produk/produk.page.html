@@ -63,6 +63,7 @@
               <ion-button *ngIf="!isInCart(product)" (click)="addToCart(product)" [disabled]="product.stock === 0"
                 color="tertiary"><ion-icon name="cart"></ion-icon></ion-button>
               <div class="num-up-down" *ngIf="isInCart(product)">
+                <span *ngIf="getQuantity(product) > 0">{{ formatPrice(getSubtotal(product)) }}</span>
                 <ion-button *ngIf="getQuantity(product) > 10" fill="clear" size="large"
                   (click)="updateQuantity(product, -10)">
                   <ion-icon name="remove-circle-outline"></ion-icon><span class="ten-text">10</span>

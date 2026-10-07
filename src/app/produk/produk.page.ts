@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Produk } from '../services/produk';
 import { Keranjang } from '../services/keranjang';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-produk',
@@ -19,7 +20,7 @@ export class ProdukPage implements OnInit {
 
   gridColumn: number = 3;
 
-  constructor(private produk: Produk, private keranjang: Keranjang) { }
+  constructor(private produk: Produk, private keranjang: Keranjang, private cdr: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.products = this.produk.products;
@@ -29,6 +30,7 @@ export class ProdukPage implements OnInit {
   // Refresh tiap halaman dibuka agar produk baru / edit stok langsung terlihat.
   ionViewWillEnter() {
     this.filter();
+    this.cdr.detectChanges();
   }
 
   setInput(name: string) {
@@ -71,6 +73,10 @@ export class ProdukPage implements OnInit {
   getQuantity(product: any): number {
     const index = this.keranjang.cartItems.findIndex(i => i.product.id === product.id);
     return this.keranjang.cartItems[index]?.qty || 0;
+  }
+
+  getSubtotal(product: any): number {
+    return this.getQuantity(product) * product.sellPrice;
   }
 
   addToCart(product: any) {

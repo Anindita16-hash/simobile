@@ -54,10 +54,13 @@ hr {
 
 .info-row {
   display: flex;
+  font-size: 15px;
+  gap: 4px;
+  color: #333333;
 }
 
 .info-row ion-label:first-child {
-  width: 160px;
+  width: 180px;
 }
 
 .desc-area {

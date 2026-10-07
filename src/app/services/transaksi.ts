@@ -468,10 +468,6 @@ export class Transaksi {
 
     this.history.push(newTransaction);
 
-    //temp add
-    console.log('New transaction:', newTransaction);
-    console.log('Full history:', this.history);
-
     this.counter++;
 
     return newTransaction;
@@ -483,8 +479,6 @@ export class Transaksi {
     transaction.item.forEach((item: { product: { profit: number; }; qty: number; }) => {
       grandProfit += item.product.profit * item.qty;
     });
-
-    console.log(transaction.item);
 
     return grandProfit;
   }

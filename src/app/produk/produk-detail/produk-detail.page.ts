@@ -52,6 +52,10 @@ export class ProdukDetailPage implements OnInit {
     return this.keranjang.cartItems[index]?.qty || 0;
   }
 
+  getSubtotal(product: any): number {
+    return this.getQuantity(product) * product.sellPrice;
+  }
+
   addToCart(product: any) {
     this.keranjang.addToCart(product);
   }
