@@ -436,7 +436,7 @@ export class Transaksi {
   constructor() { }
 
   getNextId(): string {
-    return `#${this.counter}`;
+    return `${this.counter}`;
   }
 
   saveTransaction(items: any[], total: number) {
@@ -468,7 +468,7 @@ export class Transaksi {
       total: total,
     };
 
-    this.history.unshift(newTransaction);
+    this.history.push(newTransaction);
 
     //temp add
     console.log('New transaction:', newTransaction);
