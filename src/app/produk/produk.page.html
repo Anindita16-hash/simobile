@@ -16,7 +16,7 @@
 
   <!-- Search Bar Katalog -->
   <ion-item lines="none" class="search-bar">
-    <ion-searchbar [(ngModel)]="keyword" (ionInput)="filter()" placeholder="Cari Produk" (ionFocus)="searchFocus = true"
+    <ion-searchbar [(ngModel)]="keyword" (keyup)="filter()" placeholder="Cari Produk" (ionFocus)="searchFocus = true"
       (ionBlur)="searchFocus = false"></ion-searchbar>
   </ion-item>
 
@@ -46,7 +46,7 @@
                 Stok: {{ product.stock }}
               </ion-badge>
             </div>
-            <ion-card-subtitle>{{ product.quantity }}</ion-card-subtitle>
+            <ion-card-subtitle>{{ product.net }}</ion-card-subtitle>
           </ion-card-header>
 
           <ion-card-content>

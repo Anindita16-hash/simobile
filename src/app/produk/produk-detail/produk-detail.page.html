@@ -37,9 +37,9 @@
         </ion-card-header>
 
         <ion-card-content>
-          <ion-item class="quantity">
-            <ion-label>Ukuran</ion-label>
-            <ion-label slot="end">{{ product.quantity }}</ion-label>
+          <ion-item class="net-content">
+            <ion-label>Isi Bersih</ion-label>
+            <ion-label slot="end">{{ product.net }}</ion-label>
           </ion-item>
 
           <div class="row-flex">
@@ -82,8 +82,8 @@
                 <ion-label>{{ product.brand }}</ion-label>
               </div>
               <div class="info-row">
-                <ion-label>Ukuran</ion-label>
-                <ion-label>{{ product.quantity }}</ion-label>
+                <ion-label>Isi Bersih</ion-label>
+                <ion-label>{{ product.net }}</ion-label>
               </div>
               <div class="info-row">
                 <ion-label>Sisa Stok</ion-label>
@@ -103,7 +103,7 @@
               </div>
               <ion-card-content *ngIf="product.description">
                 <ion-item class="desc-area">Deskripsi Produk</ion-item>
-                <ion-item lines="none" class="desc-area ten-text">{{ product.description }}</ion-item>
+                <ion-item lines="none" class="desc-area desc-content ten-text">{{ product.description }}</ion-item>
               </ion-card-content>
             </ion-card-content>
           </ion-card>

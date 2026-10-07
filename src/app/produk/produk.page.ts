@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Produk } from '../services/produk';
+import { CartService } from '../services/keranjang';
 
 @Component({
   selector: 'app-produk',
@@ -21,7 +22,7 @@ export class ProdukPage implements OnInit {
   // temp
   quantity: number = 0;
 
-  constructor(private produk: Produk) { }
+  constructor(private produk: Produk, private keranjang: CartService) { }
 
   ngOnInit() {
     this.products = this.produk.products;
@@ -61,14 +62,21 @@ export class ProdukPage implements OnInit {
   }
 
   // temp!! sampai bawah!!
+  getQuantity(product: any): number {
+    const index = this.keranjang.cartItems.findIndex(i => i.product.id === product.id);
+    return this.keranjang.cartItems[index]?.qty || 0;
+  }
+
   addToCart(product: any) {
-    this.quantity += 1;
+    this.keranjang.addToCart(product);
   }
 
   addQuantity(product: any, amount: number = 1) {
-    let total = this.quantity + amount;
+    let total = this.getQuantity(product) + amount;
     if (total > product.stock) this.quantity = product.stock;
     else this.quantity = total;
+
+    this.keranjang.addToCart(product, amount);
   }
 
   subtractQuantity(amount: number = 1) {

@@ -30,7 +30,7 @@ ion-card-title {
     flex: 1;
 }
 
-.quantity {
+.net-content {
     border-top: 1px solid #CCCCCC;
     border-bottom: 1px solid #CCCCCC;
     margin-bottom: 16px;
@@ -62,6 +62,12 @@ hr {
 
 .desc-area {
     margin-left: -30px;
+}
+
+.desc-content {
+    margin-top: 10px;
+    white-space: pre-line;
+    text-align: justify;
 }
 
 .num-up-down {

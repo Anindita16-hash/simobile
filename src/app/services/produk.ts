@@ -22,7 +22,7 @@ export class Produk {
             id: "P001",
             name: "Beras Premium Sak",
             url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSckxmRUzzTdJPd4zU0d2W3Y_GoQac1PM2cLIrf9G_FKy_rC_xAdlYyht6G&s=10",
-            quantity: "5000gr",
+            net: "5000gr",
             description: "",
             category: "C001",
             brand: "Merdeka",
@@ -35,7 +35,7 @@ export class Produk {
             id: "P002",
             name: "Gula Pasir",
             url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSztqJDXQ6VzkjKIPpkcwpa-mJlRVB-nfDKKM-y1PTj715IaQ7USj0B79ys&s=10",
-            quantity: "500gr",
+            net: "500gr",
             description: "",
             category: "C001",
             brand: "1945",
@@ -48,7 +48,7 @@ export class Produk {
             id: "P003",
             name: "Telur Ayam Omega Pack",
             url: "https://akcdn.detik.net.id/visual/2024/12/31/ketahui-perbedaan-telur-biasa-dan-telur-omega-untuk-mpasi-anak_169.jpeg?",
-            quantity: "10 butir",
+            net: "10 butir",
             description: "",
             category: "C001",
             brand: "178",
@@ -61,8 +61,8 @@ export class Produk {
             id: "P004",
             name: "Bumbu Siap Pakai Nasi Goreng",
             url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpkVSqAdYxEq1PF6aC92cBDB-RppeEwuh8-ss9sOVRvLZnF6kghBpfN-0&s=10",
-            quantity: "45gr",
-            description: "",
+            net: "45gr",
+            description: "Lezat Bumbu Siap Pakai Nasi Goreng adalah bumbu instan yang dibuat berdasarkan resep asli nasi goreng Indonesia, rasa masakan rumah favorit keluarga.\n\nLezat Bumbu Siap Pakai Nasi Goreng dibuat tanpa pengawet dan pewarna buatan, juga diracik dari rempah pilihan Indonesia. Satu bungkus cukup untuk 2 porsi nasi goreng.",
             category: "C002",
             brand: "Lezat",
             stock: 50,
@@ -74,7 +74,7 @@ export class Produk {
             id: "P005",
             name: "Sosis Single Original",
             url: "https://media.suara.com/pictures/653x366/2021/03/25/18530-ilustrasi-sosis.webp",
-            quantity: "65gr",
+            net: "65gr",
             description: "",
             category: "C003",
             brand: "Salsus",
@@ -87,7 +87,7 @@ export class Produk {
             id: "P006",
             name: "Ice Cream Vanilla Cup",
             url: "https://saltandbaker.com/wp-content/uploads/2019/10/Homemade-Vanilla-Ice-cream-6.jpg",
-            quantity: "700ml",
+            net: "700ml",
             description: "",
             category: "C003",
             brand: "Eskim",
@@ -100,7 +100,7 @@ export class Produk {
             id: "P007",
             name: "Air Mineral Botol",
             url: "https://images.alodokter.com/dk0z4ums3/image/upload/v1770794737/attached_image/air-mineral-yang-baik-untuk-kesehatan.jpg",
-            quantity: "1500ml",
+            net: "1500ml",
             description: "",
             category: "C004",
             brand: "Desa",
@@ -113,7 +113,7 @@ export class Produk {
             id: "P008",
             name: "Teh Lemon Madu Botol",
             url: "https://img.magnific.com/premium-photo/two-cups-tea-with-lemon-sliced-lemon-bowl-honey-wooden-table-vitamin-warming-drink-vertical-view_107288-4669.jpg?semt=ais_hybrid&w=740&q=80",
-            quantity: "350ml",
+            net: "350ml",
             description: "",
             category: "C004",
             brand: "The",
@@ -126,7 +126,7 @@ export class Produk {
             id: "P009",
             name: "Pembersih Lantai Lemon Pouch",
             url: "https://d1vbn70lmn1nqe.cloudfront.net/prod/wp-content/uploads/2025/08/06124055/pembersih-lantai.jpg",
-            quantity: "800ml",
+            net: "800ml",
             description: "",
             category: "C005",
             brand: "Spotless",
@@ -139,7 +139,7 @@ export class Produk {
             id: "P010",
             name: "Amplop Putih Kecil",
             url: "https://image.made-in-china.com/202f0j00BRnUIPCKZoqz/Cheap-White-Plain-Post-Envelope.webp",
-            quantity: "20 lembar",
+            net: "20 lembar",
             description: "",
             category: "C006",
             brand: "Garuda",
@@ -155,12 +155,13 @@ export class Produk {
         return "P" + num.toString().padStart(3, "0");
     }
 
-    addProduct(p_name: string, p_url: string, p_quantity: string, p_desc: string, p_cat: string, p_brand: string, p_stock: number, p_bprice: number, p_sprice: number) {
+    // based on produk form layout
+    addProduct(p_cat: string, p_name: string, p_url: string, p_net: string, p_brand: string, p_desc: string, p_stock: number, p_bprice: number, p_sprice: number) {
         this.products.push({
             id: this.generateID(),
             name: p_name,
             url: p_url,
-            quantity: p_quantity,
+            net: p_net,
             description: p_desc,
             category: p_cat,
             brand: p_brand,
@@ -171,19 +172,34 @@ export class Produk {
         });
     }
 
-    editProduct(id: string, product: any) {
+    editProduct(id: string, p_cat: string, p_name: string, p_url: string, p_net: string, p_brand: string, p_desc: string, p_stock: number, p_bprice: number, p_sprice: number) {
         const index = this.products.findIndex(p => p.id === id);
         if (index !== -1) {
-            this.products[index] = product;
+            this.products[index].category = p_cat;
+            this.products[index].name = p_name;
+            this.products[index].url = p_url;
+            this.products[index].net = p_net;
+            this.products[index].brand = p_brand;
+            this.products[index].description = p_desc;
+            this.products[index].stock = p_stock;
+            this.products[index].buyPrice = p_bprice;
+            this.products[index].sellPrice = p_sprice;
+            this.products[index].profit = p_sprice - p_bprice;
         }
+        return;
     }
 
     searchProductByName(keyword: string) {
         const result = [];
+        let count = 0;
+        let max = 10;
 
         for (let i = 0; i < this.products.length; i++) {
             if (this.products[i].name.toLowerCase().includes(keyword.toLowerCase().trim())) {
-                result.push(this.products[i]);
+                if (count < max) {
+                    result.push(this.products[i]);
+                    count++;
+                } else break;
             }
         }
 
@@ -191,23 +207,18 @@ export class Produk {
     }
 
     searchProductByID(id: string): any {
-        for (let i = 0; i < this.products.length; i++) {
-            if (this.products[i].id === id) {
-                return this.products[i];
-            }
-        }
-
-        return null;
+        const index = this.products.findIndex(p => p.id === id);
+        return this.products[index] || null;
     }
 
     getCategoryName(id: string): string {
-        for (let i = 0; i < this.categories.length; i++) {
-            if (this.categories[i].id === id) {
-                return this.categories[i].name;
-            }
-        }
+        const index = this.categories.findIndex(c => c.id === id);
+        return this.categories[index]?.name || "";
+    }
 
-        return "";
+    getCategoryIDByName(name: string): string {
+        const index = this.categories.findIndex(c => c.name === name);
+        return this.categories[index]?.id || "";
     }
 
     updateStock(id: number, quantity: number) { // can add or subtract, for subtract use negative amount

@@ -23,9 +23,10 @@ export class ProdukDetailPage implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.id = params['id'];
+
+      if (this.id !== undefined && this.id !== '') this.product = this.produk.searchProductByID(this.id);
     });
 
-    if (this.id !== null || this.id !== '') this.product = this.produk.searchProductByID(this.id);
     this.defaultImage = this.produk.defaultImage;
   }
 

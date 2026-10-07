@@ -42,6 +42,12 @@ export class CartService {
 
     if (existingItem) {
       existingItem.qty += qty;
+
+      if (existingItem.qty <= 0) {
+        this.cartItems.splice(this.cartItems.indexOf(existingItem), 1);
+        return { success: true };
+      }
+
       existingItem.subtotal = existingItem.qty * price;
     } else {
       this.cartItems.push({
@@ -88,25 +94,25 @@ export class CartService {
   }
 
   confirmTransaction(): any {
-  if (this.cartItems.length === 0) return null;
+    if (this.cartItems.length === 0) return null;
 
-  // 1. Potong stok produk di ProdukService
-  for (let i = 0; i < this.cartItems.length; i++) {
-    const item = this.cartItems[i];
-    // Cari index array berdasarkan ID produk
-    const index = this.produkService.products.findIndex(p => p.id === item.product.id);
-    if (index !== -1) {
-      this.produkService.updateStock(index, -item.qty);
+    // 1. Potong stok produk di ProdukService
+    for (let i = 0; i < this.cartItems.length; i++) {
+      const item = this.cartItems[i];
+      // Cari index array berdasarkan ID produk
+      const index = this.produkService.products.findIndex(p => p.id === item.product.id);
+      if (index !== -1) {
+        this.produkService.updateStock(index, -item.qty);
+      }
     }
+
+    // 2. Simpan transaksi ke TransaksiService
+    const total = this.getTotalPrice();
+    const savedTx = this.transaksiService.saveTransaction(this.cartItems, total);
+
+    // 3. Bersihkan keranjang di service
+    this.clearCart();
+
+    return savedTx;
   }
-
-  // 2. Simpan transaksi ke TransaksiService
-  const total = this.getTotalPrice();
-  const savedTx = this.transaksiService.saveTransaction(this.cartItems, total);
-
-  // 3. Bersihkan keranjang di service
-  this.clearCart();
-  
-  return savedTx;
-}
 }

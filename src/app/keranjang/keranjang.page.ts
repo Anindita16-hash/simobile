@@ -26,7 +26,7 @@ export class KeranjangPage implements OnInit {
     private alertController: AlertController
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   // Lifecycle Hook Ionic: Dipanggil setiap kali tab Keranjang dibuka
   ionViewWillEnter() {
@@ -93,7 +93,7 @@ export class KeranjangPage implements OnInit {
 
   removeItem(productId: any) {
     this.cartService.removeFromCart(productId);
-  this.cartItems = this.cartService.getCart();
+    this.cartItems = this.cartService.getCart();
   }
 
   async cancelTransaction() {
@@ -134,9 +134,9 @@ export class KeranjangPage implements OnInit {
             if (savedTx) {
               // Reset state halaman keranjang agar kembali ke mode default
               this.resetPage();
-              
+
               this.showToast(`Transaksi ${savedTx.id} berhasil dikonfirmasi!`, 'success');
-              
+
               // Pindah ke halaman Riwayat Transaksi
               this.router.navigate(['/transaksi']);
             }
