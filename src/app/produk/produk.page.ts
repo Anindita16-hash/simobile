@@ -37,6 +37,11 @@ export class ProdukPage implements OnInit {
     this.filter()
   }
 
+  clearSearch() {
+    this.keyword = "";
+    this.filter();
+  }
+
   chunkArray(arr: any[], chunkSize: number): any[][] {
     if (!arr) return [];
     const result = [];

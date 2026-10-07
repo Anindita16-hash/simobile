@@ -26,7 +26,7 @@
     <h1>Transaksi #{{ transaction.id }}</h1>
     <p>Tanggal: {{ transaction.date }}</p>
   </div>
-  
+
   <!--Daftar barang-->
   <ion-list inset="true" *ngIf="transaction">
     <div class="list-header">
@@ -53,6 +53,17 @@
 
     <div class="total-price">
       Rp. {{ transaction.total | number }}
+    </div>
+  </div>
+
+  <!--Total Profit-->
+  <div class="price-total" *ngIf="transaction">
+    <div class="total-label">
+      Estimasi Keuntungan
+    </div>
+
+    <div class="total-price">
+      Rp. {{ getGrandProfit(transaction) | number }}
     </div>
   </div>
 

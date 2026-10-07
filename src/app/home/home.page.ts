@@ -106,5 +106,4 @@ export class HomePage implements OnInit {
   formatPrice(price: number) {
     return 'Rp. ' + (price ? Number(price).toLocaleString('id-ID') : '0');
   }
-
 }

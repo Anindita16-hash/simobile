@@ -58,12 +58,12 @@ export class Keranjang {
     const item = this.cartItems.find(i => i.product.id === productId);
     if (!item) return { success: false, message: 'Item tidak ditemukan' };
 
-    const newQty = item.qty + delta;
+    let newQty = item.qty + delta;
     const availableStock = this.getProductStock(item.product);
     const price = this.getProductPrice(item.product);
 
     if (newQty > availableStock) {
-      return { success: false, message: 'Jumlah melebihi stok tersedia' };
+      newQty = availableStock;
     }
 
     if (newQty < 1) {

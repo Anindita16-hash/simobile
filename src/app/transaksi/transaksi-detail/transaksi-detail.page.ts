@@ -26,4 +26,7 @@ export class TransaksiDetailPage implements OnInit {
     });
   }
 
+  getGrandProfit(t: any): number {
+    return this.transaksi.getGrandProfit(t);
+  }
 }

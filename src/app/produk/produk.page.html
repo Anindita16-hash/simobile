@@ -17,13 +17,13 @@
   <!-- Search Bar Katalog -->
   <ion-item lines="none" class="search-bar">
     <ion-searchbar [(ngModel)]="keyword" (keyup)="filter()" placeholder="Cari Produk" (ionFocus)="searchFocus = true"
-      (ionBlur)="searchFocus = false"></ion-searchbar>
+      (ionBlur)="searchFocus = false" (ionClear)="clearSearch()"></ion-searchbar>
   </ion-item>
 
   <ion-list lines="full">
-    <ng-container *ngIf="searchFocus">
+    <ion-card *ngIf="searchFocus">
       <ion-item *ngFor="let product of products" (mousedown)="setInput(product.name)">{{ product.name }}</ion-item>
-    </ng-container>
+    </ion-card>
   </ion-list>
 
   <!-- Empty State Default -->
