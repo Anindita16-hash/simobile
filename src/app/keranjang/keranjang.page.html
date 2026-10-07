@@ -81,7 +81,7 @@
                 <ion-icon name="remove-circle-outline" slot="icon-only"></ion-icon>
               </ion-button>
 
-              <span class="qty-text">{{ item.qty ?? 1 }}</span>
+              <span class="qty-text">{{ getQuantity(item) }}</span>
 
               <ion-button 
                 fill="clear" 

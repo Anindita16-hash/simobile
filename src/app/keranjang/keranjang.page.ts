@@ -79,6 +79,11 @@ export class KeranjangPage implements OnInit {
     }
   }
 
+  getQuantity(item: any): number {
+    const index = this.cartService.cartItems.findIndex(i => i.product.id === item.id);
+    return this.cartService.cartItems[index]?.qty || 1;
+  }
+
   increaseQty(item: any) {
     const result = this.cartService.updateQuantity(item.product.id, 1);
     if (!result.success) {

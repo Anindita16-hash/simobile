@@ -40,14 +40,10 @@ export class CartService {
       return { success: false, message: 'Jumlah melebihi stok tersedia' };
     }
 
+    console.log("Before:", this.cartItems);
+
     if (existingItem) {
       existingItem.qty += qty;
-
-      if (existingItem.qty <= 0) {
-        this.cartItems.splice(this.cartItems.indexOf(existingItem), 1);
-        return { success: true };
-      }
-
       existingItem.subtotal = existingItem.qty * price;
     } else {
       this.cartItems.push({
@@ -57,6 +53,8 @@ export class CartService {
       });
     }
 
+    console.log("After:", this.cartItems);
+
     return { success: true };
   }
 
@@ -64,12 +62,12 @@ export class CartService {
     const item = this.cartItems.find(i => i.product.id === productId);
     if (!item) return { success: false, message: 'Item tidak ditemukan' };
 
-    const newQty = item.qty + delta;
+    let newQty = item.qty + delta;
     const availableStock = this.getProductStock(item.product);
     const price = this.getProductPrice(item.product);
 
     if (newQty > availableStock) {
-      return { success: false, message: 'Jumlah melebihi stok tersedia' };
+      newQty = availableStock;
     }
 
     if (newQty < 1) {

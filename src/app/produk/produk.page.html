@@ -56,18 +56,22 @@
               <ion-button *ngIf="!isInCart(product)" (mousedown)="addToCart(product)" [disabled]="product.stock === 0"
                 color="tertiary"><ion-icon name="cart"></ion-icon></ion-button>
               <div class="num-up-down" *ngIf="isInCart(product)">
-                <ion-button *ngIf="quantity > 10" fill="clear" size="large" (mousedown)="subtractQuantity(10)">
+                <ion-button *ngIf="getQuantity(product) > 10" fill="clear" size="large"
+                  (mousedown)="updateQuantity(product, -10)">
                   <ion-icon name="remove-circle-outline"></ion-icon><span class="ten-text">10</span>
                 </ion-button>
-                <ion-button fill="clear" size="large" (mousedown)="subtractQuantity()">
+                <ion-button fill="clear" size="large" (mousedown)="updateQuantity(product, -1)">
                   <ion-icon name="remove-circle-outline"></ion-icon>
                 </ion-button>
-                <span>{{ quantity }}</span>
-                <ion-button fill="clear" size="large" (mousedown)="addQuantity(product)">
+                <span>{{ getQuantity(product) }}</span>
+                <ion-button fill="clear" size="large" (mousedown)="updateQuantity(product, 1)">
                   <ion-icon name="add-circle-outline"></ion-icon>
                 </ion-button>
-                <ion-button fill="clear" size="large" (mousedown)="addQuantity(product, 10)">
+                <ion-button fill="clear" size="large" (mousedown)="updateQuantity(product, 10)">
                   <ion-icon name="add-circle-outline"></ion-icon><span class="ten-text">10</span>
+                </ion-button>
+                <ion-button *ngIf="getQuantity(product) > 0" fill="clear" color="danger" class="btn-delete-item" (mousedown)="removeItem(product.id)">
+                  <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
                 </ion-button>
               </div>
             </div>

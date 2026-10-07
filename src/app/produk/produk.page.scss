@@ -57,3 +57,13 @@
         font-weight: 500;
     }
 }
+
+.btn-delete-item {
+      margin: 4px 0 0 0;
+      --padding-start: 0;
+      --padding-end: 0;
+
+      ion-icon {
+        font-size: 20px;
+      }
+    }

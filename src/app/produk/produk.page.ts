@@ -57,7 +57,7 @@ export class ProdukPage implements OnInit {
   }
 
   isInCart(product: any) {
-    if (this.quantity < 1) return false;
+    if (this.getQuantity(product) < 1) return false;
     else return true;
   }
 
@@ -71,17 +71,11 @@ export class ProdukPage implements OnInit {
     this.keranjang.addToCart(product);
   }
 
-  addQuantity(product: any, amount: number = 1) {
-    let total = this.getQuantity(product) + amount;
-    if (total > product.stock) this.quantity = product.stock;
-    else this.quantity = total;
-
-    this.keranjang.addToCart(product, amount);
+  updateQuantity(product: any, amount: number = 1) {
+    this.keranjang.updateQuantity(product.id, amount);
   }
 
-  subtractQuantity(amount: number = 1) {
-    let total = this.quantity - amount;
-    if (total < 0) this.quantity = 0;
-    else this.quantity = total;
+  removeItem(id: string) {
+    this.keranjang.removeFromCart(id);
   }
 }
