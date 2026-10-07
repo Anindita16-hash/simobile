@@ -34,6 +34,10 @@ export class ProdukDetailPage implements OnInit {
     return this.produk.getCategoryName(id);
   }
 
+  getProfit(product: any): number {
+    return product.sellPrice - product.buyPrice;
+  }
+
   formatPrice(price: number) {
     return 'Rp. ' + (price ? price.toLocaleString('id-ID') : '0');
   }

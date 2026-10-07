@@ -99,7 +99,7 @@
               </div>
               <div class="info-row">
                 <ion-label>Estimasi Keuntungan</ion-label>
-                <ion-label>{{ formatPrice(product.profit) }}</ion-label>
+                <ion-label>{{ formatPrice(getProfit(product)) }}</ion-label>
               </div>
               <ion-card-content *ngIf="product.description">
                 <ion-item class="desc-area">Deskripsi Produk</ion-item>

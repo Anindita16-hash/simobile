@@ -14,7 +14,8 @@ export class Produk {
         { id: "C003", name: "Makanan Beku" },
         { id: "C004", name: "Minuman" },
         { id: "C005", name: "Perawatan Rumah" },
-        { id: "C006", name: "Alat Tulis" }
+        { id: "C006", name: "Alat Tulis" },
+        { id: "C007", name: "Makanan Instan" }
     ];
 
     products = [
@@ -29,7 +30,6 @@ export class Produk {
             stock: 15,
             buyPrice: 74500,
             sellPrice: 83900,
-            profit: 9400,
         },
         {
             id: "P002",
@@ -42,12 +42,11 @@ export class Produk {
             stock: 5,
             buyPrice: 8500,
             sellPrice: 15000,
-            profit: 6500,
         },
         {
             id: "P003",
             name: "Telur Ayam Omega Pack",
-            url: "https://akcdn.detik.net.id/visual/2024/12/31/ketahui-perbedaan-telur-biasa-dan-telur-omega-untuk-mpasi-anak_169.jpeg?",
+            url: "https://akcdn.detik.net.id/visual/2024/12/31/ketahui-perbedaan-telur-biasa-dan-telur-omega-untuk-mpasi-anak_169.jpeg?w=700&q=90",
             net: "10 butir",
             description: "",
             category: "C001",
@@ -55,7 +54,6 @@ export class Produk {
             stock: 20,
             buyPrice: 28000,
             sellPrice: 33600,
-            profit: 5600,
         },
         {
             id: "P004",
@@ -65,10 +63,9 @@ export class Produk {
             description: "Lezat Bumbu Siap Pakai Nasi Goreng adalah bumbu instan yang dibuat berdasarkan resep asli nasi goreng Indonesia, rasa masakan rumah favorit keluarga.\n\nLezat Bumbu Siap Pakai Nasi Goreng dibuat tanpa pengawet dan pewarna buatan, juga diracik dari rempah pilihan Indonesia. Satu bungkus cukup untuk 2 porsi nasi goreng.",
             category: "C002",
             brand: "Lezat",
-            stock: 50,
+            stock: 0,
             buyPrice: 2300,
             sellPrice: 4500,
-            profit: 2200,
         },
         {
             id: "P005",
@@ -81,7 +78,6 @@ export class Produk {
             stock: 30,
             buyPrice: 7500,
             sellPrice: 8800,
-            profit: 1300,
         },
         {
             id: "P006",
@@ -94,7 +90,6 @@ export class Produk {
             stock: 5,
             buyPrice: 23500,
             sellPrice: 35000,
-            profit: 11500,
         },
         {
             id: "P007",
@@ -107,7 +102,6 @@ export class Produk {
             stock: 100,
             buyPrice: 5100,
             sellPrice: 9900,
-            profit: 4800,
         },
         {
             id: "P008",
@@ -120,7 +114,6 @@ export class Produk {
             stock: 20,
             buyPrice: 2700,
             sellPrice: 3500,
-            profit: 800,
         },
         {
             id: "P009",
@@ -133,7 +126,6 @@ export class Produk {
             stock: 15,
             buyPrice: 10900,
             sellPrice: 13100,
-            profit: 22000,
         },
         {
             id: "P010",
@@ -146,7 +138,18 @@ export class Produk {
             stock: 10,
             buyPrice: 2500,
             sellPrice: 4500,
-            profit: 2000,
+        },
+        {
+            id: "P011",
+            name: "Mi Kuah Rasa Kaldu Ayam Pedas",
+            url: "https://akcdn.detik.net.id/visual/2021/01/28/ilustrasi-mie-instan_169.jpeg?w=1200",
+            net: "75gr",
+            description: "",
+            category: "C007",
+            brand: "Mindo",
+            stock: 90,
+            buyPrice: 2800,
+            sellPrice: 3200,
         }
     ];
 
@@ -168,7 +171,6 @@ export class Produk {
             stock: p_stock,
             buyPrice: p_bprice,
             sellPrice: p_sprice,
-            profit: p_sprice - p_bprice,
         });
     }
 
@@ -184,7 +186,6 @@ export class Produk {
             this.products[index].stock = p_stock;
             this.products[index].buyPrice = p_bprice;
             this.products[index].sellPrice = p_sprice;
-            this.products[index].profit = p_sprice - p_bprice;
         }
         return;
     }

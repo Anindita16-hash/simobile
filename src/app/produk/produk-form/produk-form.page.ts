@@ -69,7 +69,7 @@ export class ProdukFormPage implements OnInit {
         this.newBuyPrice = this.product.buyPrice.toString();
         this.newSellPrice = this.product.sellPrice.toString();
 
-        this.profit = this.product.profit;
+        this.calculateProfit();
       }
     });
 
@@ -79,6 +79,10 @@ export class ProdukFormPage implements OnInit {
 
   formatPrice(price: number) {
     return 'Rp. ' + (price ? price.toLocaleString('id-ID') : '0');
+  }
+
+  getProfit(product: any) {
+    return product.sellPrice - product.buyPrice;
   }
 
   checkValid() {
