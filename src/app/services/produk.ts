@@ -133,7 +133,7 @@ export class Produk {
             stock: 15,
             buyPrice: 10900,
             sellPrice: 13100,
-            profit: 22000,
+            profit: 2200,
         },
         {
             id: "P010",

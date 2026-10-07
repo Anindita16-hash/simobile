@@ -43,6 +43,11 @@
  * supaya tidak manual copy-past tiap *.page.scss
  */
 
+// Judul card ikut warna teks tema
+ion-card-title {
+  --color: var(--ion-text-color);
+}
+
 // Avatar + foto profil - dipakai di profil n profil-edit
 .user-profile {
   text-align: center;

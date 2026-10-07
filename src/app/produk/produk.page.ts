@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Produk } from '../services/produk';
-import { CartService } from '../services/keranjang';
+import { Keranjang } from '../services/keranjang';
 
 @Component({
   selector: 'app-produk',
@@ -19,11 +19,16 @@ export class ProdukPage implements OnInit {
 
   gridColumn: number = 3;
 
-  constructor(private produk: Produk, private keranjang: CartService) { }
+  constructor(private produk: Produk, private keranjang: Keranjang) { }
 
   ngOnInit() {
     this.products = this.produk.products;
     this.defaultImage = this.produk.defaultImage;
+  }
+
+  // Refresh tiap halaman dibuka agar produk baru / edit stok langsung terlihat.
+  ionViewWillEnter() {
+    this.filter();
   }
 
   setInput(name: string) {

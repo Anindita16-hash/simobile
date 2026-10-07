@@ -24,11 +24,11 @@
     <div class="header-dashboard">
       <div class="store-info">
         <h2>Laporan Harian</h2>
-        <p>=PLACEHOLDER NAMA TOKO=</p>
+        <p>{{ storeName }}</p>
       </div>
 
       <div class="date-info">
-        <p>=PLACEHOLDER TANGGAL=</p>
+        <p>{{ todayLabel }}</p>
       </div>
     </div>
 
@@ -38,7 +38,7 @@
       <ion-card>
         <ion-card-header>
           <ion-card-title>Total Penjualan</ion-card-title>
-          <ion-card-subtitle>Rp. =PLACEHOLDER TOTAL PENJUALAN=</ion-card-subtitle>
+          <ion-card-subtitle>{{ formatPrice(totalPenjualan) }}</ion-card-subtitle>
         </ion-card-header>
       </ion-card>
 
@@ -50,7 +50,7 @@
             <ion-card>
               <ion-card-header>
                 <ion-card-title>Estimasi Untung</ion-card-title>
-                <ion-card-subtitle>Rp. =PLACEHOLDER ESTIMASI UNTUNG=</ion-card-subtitle>
+                <ion-card-subtitle>{{ formatPrice(estimasiUntung) }}</ion-card-subtitle>
               </ion-card-header>
             </ion-card>
           </ion-col>
@@ -60,7 +60,7 @@
             <ion-card>
               <ion-card-header>
                 <ion-card-title>Jumlah Transaksi</ion-card-title>
-                <ion-card-subtitle>=PLACEHOLDER JUMLAH TRANSAKSI=</ion-card-subtitle>
+                <ion-card-subtitle>{{ jumlahTransaksi }}</ion-card-subtitle>
               </ion-card-header>
             </ion-card>
           </ion-col>
@@ -70,7 +70,7 @@
             <ion-card>
               <ion-card-header>
                 <ion-card-title>Barang Terjual</ion-card-title>
-                <ion-card-subtitle>=PLACEHOLDER BARANG TERJUAL=</ion-card-subtitle>
+                <ion-card-subtitle>{{ barangTerjual }} pcs</ion-card-subtitle>
               </ion-card-header>
             </ion-card>
           </ion-col>
@@ -80,11 +80,11 @@
             <ion-card>
               <ion-card-header>
                 <ion-card-title>Produk Terlaris</ion-card-title>
-                <ion-card-subtitle>=PLACEHOLDER PRODUK TERLARIS=</ion-card-subtitle>
+                <ion-card-subtitle>{{ produkTerlarisNama }}</ion-card-subtitle>
               </ion-card-header>
               <!--detail penjualan produk terlaris-->
               <ion-card-content>
-                =PLACEHOLDER DETAIL Barang terjual PRODUK TERLARIS=
+                {{ produkTerlarisDetail }}
               </ion-card-content>
             </ion-card>
           </ion-col>

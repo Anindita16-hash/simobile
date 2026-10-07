@@ -33,44 +33,51 @@
   </div>
 
   <!-- Product List Grid -->
+  <!-- Area navigasi (gambar+header) dan area aksi (harga+tombol cart) DIPISAH:
+       routerLink hanya di wrapper .card-nav, tombol cart di luarnya.
+       Ini menghilangkan konflik klik: tombol cart tidak lagi tertelan
+       navigasi ke detail (masalah sebelumnya diatasi dengan stopPropagation,
+       sekarang diselesaikan secara struktural). -->
   <ion-grid>
     <ion-row class="product-row" *ngFor="let products2 of chunkArray(products, gridColumn)">
       <ion-col *ngFor="let product of products2">
-        <ion-card button [routerLink]="['/produk/produk-detail', product.id]">
-          <ion-img [src]="product.url || defaultImage" class="product-image" [alt]="product.name"></ion-img>
+        <ion-card>
+          <div class="card-nav" [routerLink]="['/produk/produk-detail', product.id]">
+            <ion-img [src]="product.url || defaultImage" class="product-image" [alt]="product.name"></ion-img>
 
-          <ion-card-header>
-            <div class="row-flex">
-              <ion-card-title>{{ product.brand }} {{ product.name }}</ion-card-title>
-              <ion-badge [color]="(product.stock) === 0 ? 'danger' : (product.stock) < 10 ? 'warning' : 'medium'">
-                Stok: {{ product.stock }}
-              </ion-badge>
-            </div>
-            <ion-card-subtitle>{{ product.net }}</ion-card-subtitle>
-          </ion-card-header>
+            <ion-card-header>
+              <div class="row-flex">
+                <ion-card-title>{{ product.brand }} {{ product.name }}</ion-card-title>
+                <ion-badge [color]="(product.stock) === 0 ? 'danger' : (product.stock) < 10 ? 'warning' : 'medium'">
+                  Stok: {{ product.stock }}
+                </ion-badge>
+              </div>
+              <ion-card-subtitle>{{ product.net }}</ion-card-subtitle>
+            </ion-card-header>
+          </div>
 
           <ion-card-content>
             <div class="row-flex">
               <ion-label class="product-price">{{ formatPrice(product.sellPrice) }}</ion-label>
 
-              <ion-button *ngIf="!isInCart(product)" (mousedown)="addToCart(product)" [disabled]="product.stock === 0"
+              <ion-button *ngIf="!isInCart(product)" (click)="addToCart(product)" [disabled]="product.stock === 0"
                 color="tertiary"><ion-icon name="cart"></ion-icon></ion-button>
               <div class="num-up-down" *ngIf="isInCart(product)">
                 <ion-button *ngIf="getQuantity(product) > 10" fill="clear" size="large"
-                  (mousedown)="updateQuantity(product, -10)">
+                  (click)="updateQuantity(product, -10)">
                   <ion-icon name="remove-circle-outline"></ion-icon><span class="ten-text">10</span>
                 </ion-button>
-                <ion-button fill="clear" size="large" (mousedown)="updateQuantity(product, -1)">
+                <ion-button fill="clear" size="large" (click)="updateQuantity(product, -1)">
                   <ion-icon name="remove-circle-outline"></ion-icon>
                 </ion-button>
                 <span>{{ getQuantity(product) }}</span>
-                <ion-button fill="clear" size="large" (mousedown)="updateQuantity(product, 1)">
+                <ion-button fill="clear" size="large" (click)="updateQuantity(product, 1)">
                   <ion-icon name="add-circle-outline"></ion-icon>
                 </ion-button>
-                <ion-button fill="clear" size="large" (mousedown)="updateQuantity(product, 10)">
+                <ion-button fill="clear" size="large" (click)="updateQuantity(product, 10)">
                   <ion-icon name="add-circle-outline"></ion-icon><span class="ten-text">10</span>
                 </ion-button>
-                <ion-button *ngIf="getQuantity(product) > 0" fill="clear" color="danger" class="btn-delete-item" (mousedown)="removeItem(product.id)">
+                <ion-button *ngIf="getQuantity(product) > 0" fill="clear" color="danger" class="btn-delete-item" (click)="removeItem(product.id)">
                   <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
                 </ion-button>
               </div>

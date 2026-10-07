@@ -5,7 +5,7 @@ import { Transaksi } from './transaksi';
 @Injectable({
   providedIn: 'root'
 })
-export class CartService {
+export class Keranjang {
 
   cartItems: any[] = [];
 
@@ -23,15 +23,10 @@ export class CartService {
   }
 
   getCart(): any[] {
-    console.log('GET CART CALLED:', this.cartItems);
     return this.cartItems;
   }
 
   addToCart(product: any, qty: number = 1): { success: boolean; message?: string } {
-    // debug
-    console.log('ADD TO CART CALLED:', this.cartItems);
-
-    
     const availableStock = this.getProductStock(product);
     if (availableStock <= 0) {
       return { success: false, message: 'Stok produk habis' };
@@ -81,7 +76,10 @@ export class CartService {
   }
 
   removeFromCart(productId: any) {
-    this.cartItems = this.cartItems.filter(item => item.product.id !== productId);
+    const index = this.cartItems.findIndex(item => item.product.id === productId);
+    if (index !== -1) {
+      this.cartItems.splice(index, 1);
+    }
   }
 
   clearCart() {
@@ -105,20 +103,13 @@ export class CartService {
     }
   }
 
-  // 2. Simpan transaksi ke TransaksiService
+  // Simpan transaksi ke TransaksiService
   const total = this.getTotalPrice();
-  // const savedTx = this.transaksiService.saveTransaction(this.cartItems, total);
   const savedTx = this.transaksiService.saveTransaction(this.cartItems, total);
 
-  console.log('=== TRANSACTION SAVED ===');
-  console.log('savedTx:', savedTx);
-  console.log('savedTx.id:', savedTx.id);
-  console.log('savedTx.id type:', typeof savedTx.id);
-
-
-  // 3. Bersihkan keranjang di service
+  // Bersihkan keranjang di service
   this.clearCart();
-  
+
   return savedTx;
-}
+  }
 }

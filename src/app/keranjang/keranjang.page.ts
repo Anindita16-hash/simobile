@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastController, AlertController } from '@ionic/angular';
-import { CartService } from '../services/keranjang';
+import { Keranjang } from '../services/keranjang';
 import { Produk } from '../services/produk';
 
 @Component({
@@ -16,39 +16,38 @@ export class KeranjangPage implements OnInit {
   searchKeyword: string = '';
   searchResults: any[] = [];
   hasSearched: boolean = false;
-  cartItems: any[] = [];
 
   constructor(
-    public cartService: CartService,
+    public cartService: Keranjang,
     public produkService: Produk,
     private router: Router,
     private toastController: ToastController,
-    private alertController: AlertController
+    private alertController: AlertController,
+    private cdr: ChangeDetectorRef
   ) { }
 
-  ngOnInit() { 
-    console.log('=== KERANJANG SERVICE INSTANCE ===');
-  console.log(this.cartService);
-  console.log('cartItems:', this.cartService.cartItems);
+  ngOnInit() { }
 
+  // Binding reaktif - live search template selalu membaca referensi live dari Keranjang.
+  get cartItems(): any[] {
+    return this.cartService.getCart();
   }
 
-  // Lifecycle Hook Ionic: Dipanggil setiap kali tab Keranjang dibuka
+  // Lifecycle dipanggil setiap kali tab Keranjang dibuka — reset state pencarian ke kondisi default
+  // paksa change detection buat getter cartItems (referensi live service) langsung
+
   ionViewWillEnter() {
     this.resetPage();
+    this.cdr.detectChanges();
   }
 
-  // Fungsi untuk mengembalikan halaman ke kondisi default (kosong)
-  resetPage() {
-    this.cartItems = this.cartService.getCart(); // mengambil array []
-    
-    // debug
-    console.log('=== KERANJANG PAGE DEBUG ===');
-  console.log('CartService cartItems:', this.cartService.cartItems);
-  console.log('KeranjangPage cartItems:', this.cartItems);
-  console.log('Cart total:', this.cartService.getTotalPrice());
+  ionViewDidEnter() {
+    this.resetPage();
+    this.cdr.detectChanges();
+  }
 
-    
+  // Fungsi untuk mengembalikan halaman ke kondisi default (pencarian kosong)
+  resetPage() {
     this.searchKeyword = '';
     this.searchResults = [];
     this.hasSearched = false;
@@ -83,7 +82,6 @@ export class KeranjangPage implements OnInit {
 
     const result = this.cartService.addToCart(product, 1);
     if (result.success) {
-      this.cartItems = this.cartService.getCart();
       this.searchKeyword = '';
       this.searchResults = [];
       this.hasSearched = false;
@@ -93,42 +91,29 @@ export class KeranjangPage implements OnInit {
   }
 
   getQuantity(item: any): number {
-    //const index = this.cartService.cartItems.findIndex(i => i.product.id === item.id);
-    //return this.cartService.cartItems[index]?.qty || 1;
-
-    return item.qty || 1;
+    // Dipanggil dari template dengan cart-item
+    if (item && typeof item.qty === 'number') {
+      return item.qty;
+    }
+    // if dipanggil dengan product, cari qty di service
+    const found = this.cartService.cartItems.find(i => i.product.id === item?.product?.id || i.product.id === item?.id);
+    return found?.qty || 0;
   }
 
   increaseQty(item: any) {
-    /*const result = this.cartService.updateQuantity(item.product.id, 1);
-    if (!result.success) {
-      this.showToast(result.message || 'Jumlah melebihi stok tersedia', 'warning');
-    }*/
     const result = this.cartService.updateQuantity(item.product.id, 1);
-
     if (!result.success) {
       this.showToast(result.message || 'Jumlah melebihi stok tersedia', 'warning');
-      return;
-  }
-
-  this.cartItems = this.cartService.getCart();
-   
+    }
   }
 
   decreaseQty(item: any) {
     if (item.qty <= 1) return;
-    //this.cartService.updateQuantity(item.product.id, -1);
-
-    const result = this.cartService.updateQuantity(item.product.id, -1);
-
-    if (result.success) {
-      this.cartItems = this.cartService.getCart();
-    }
+    this.cartService.updateQuantity(item.product.id, -1);
   }
 
   removeItem(productId: any) {
     this.cartService.removeFromCart(productId);
-    this.cartItems = this.cartService.getCart();
   }
 
   async cancelTransaction() {
@@ -167,12 +152,12 @@ export class KeranjangPage implements OnInit {
           handler: () => {
             const savedTx = this.cartService.confirmTransaction();
             if (savedTx) {
-              // Reset state halaman keranjang agar kembali ke mode default
+              // Reset state pencarian kembali ke mode default
               this.resetPage();
 
               this.showToast(`Transaksi ${savedTx.id} berhasil dikonfirmasi!`, 'success');
 
-              // Pindah ke halaman Riwayat Transaksi
+              // Pindah ke riwayat transaksi
               this.router.navigate(['/transaksi']);
             }
           }

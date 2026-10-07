@@ -18,17 +18,12 @@ export class TransaksiDetailPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    
-    // get transaction id from URL
-    this.idTransaksi = this.route.snapshot.paramMap.get('id') || '';
-
-    // get transaction from service
-    this.transaction = this.transaksi.getTransactionId(this.idTransaksi);
-
-    console.log('ID Transaksi:', this.idTransaksi);
-    console.log('Transaction detail:', this.transaction);
-    
-
+    // Ambil id dari URL via params subscribe (pola yang sama dengan produk-detail, materi Week 2 Routing).
+    // getTransactionId sudah toleran terhadap prefix '#' untuk kompatibilitas data lama.
+    this.route.params.subscribe(params => {
+      this.idTransaksi = params['id'] || '';
+      this.transaction = this.transaksi.getTransactionId(this.idTransaksi);
+    });
   }
 
 }
