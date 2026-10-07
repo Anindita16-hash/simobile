@@ -23,10 +23,15 @@ export class CartService {
   }
 
   getCart(): any[] {
+    console.log('GET CART CALLED:', this.cartItems);
     return this.cartItems;
   }
 
   addToCart(product: any, qty: number = 1): { success: boolean; message?: string } {
+    // debug
+    console.log('ADD TO CART CALLED:', this.cartItems);
+
+    
     const availableStock = this.getProductStock(product);
     if (availableStock <= 0) {
       return { success: false, message: 'Stok produk habis' };
@@ -40,8 +45,6 @@ export class CartService {
       return { success: false, message: 'Jumlah melebihi stok tersedia' };
     }
 
-    console.log("Before:", this.cartItems);
-
     if (existingItem) {
       existingItem.qty += qty;
       existingItem.subtotal = existingItem.qty * price;
@@ -53,8 +56,6 @@ export class CartService {
       });
     }
 
-    console.log("After:", this.cartItems);
-
     return { success: true };
   }
 
@@ -62,12 +63,12 @@ export class CartService {
     const item = this.cartItems.find(i => i.product.id === productId);
     if (!item) return { success: false, message: 'Item tidak ditemukan' };
 
-    let newQty = item.qty + delta;
+    const newQty = item.qty + delta;
     const availableStock = this.getProductStock(item.product);
     const price = this.getProductPrice(item.product);
 
     if (newQty > availableStock) {
-      newQty = availableStock;
+      return { success: false, message: 'Jumlah melebihi stok tersedia' };
     }
 
     if (newQty < 1) {
@@ -92,21 +93,32 @@ export class CartService {
   }
 
   confirmTransaction(): any {
-    if (this.cartItems.length === 0) return null;
+  if (this.cartItems.length === 0) return null;
 
-    // 1. Potong stok produk di ProdukService
-    for (let i = 0; i < this.cartItems.length; i++) {
-      const item = this.cartItems[i];
-      this.produkService.updateStock(item.id, -item.qty);
+  // 1. Potong stok produk di ProdukService
+  for (let i = 0; i < this.cartItems.length; i++) {
+    const item = this.cartItems[i];
+    // Cari index array berdasarkan ID produk
+    const index = this.produkService.products.findIndex(p => p.id === item.product.id);
+    if (index !== -1) {
+      this.produkService.updateStock(item.product.id, -item.qty);
     }
-
-    // 2. Simpan transaksi ke TransaksiService
-    const total = this.getTotalPrice();
-    const savedTx = this.transaksiService.saveTransaction(this.cartItems, total);
-
-    // 3. Bersihkan keranjang di service
-    this.clearCart();
-
-    return savedTx;
   }
+
+  // 2. Simpan transaksi ke TransaksiService
+  const total = this.getTotalPrice();
+  // const savedTx = this.transaksiService.saveTransaction(this.cartItems, total);
+  const savedTx = this.transaksiService.saveTransaction(this.cartItems, total);
+
+  console.log('=== TRANSACTION SAVED ===');
+  console.log('savedTx:', savedTx);
+  console.log('savedTx.id:', savedTx.id);
+  console.log('savedTx.id type:', typeof savedTx.id);
+
+
+  // 3. Bersihkan keranjang di service
+  this.clearCart();
+  
+  return savedTx;
+}
 }
