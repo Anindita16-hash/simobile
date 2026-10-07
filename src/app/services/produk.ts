@@ -221,8 +221,10 @@ export class Produk {
         return this.categories[index]?.id || "";
     }
 
-    updateStock(id: number, quantity: number) { // can add or subtract, for subtract use negative amount
-        if (this.products[id].stock + quantity >= 0) this.products[id].stock += quantity;
-        else this.products[id].stock = 0;
+    updateStock(id: string, quantity: number) { // can add or subtract, for subtract use negative amount
+        const product = this.searchProductByID(id);
+
+        if (product.stock + quantity >= 0) product.stock += quantity;
+        else product.stock = 0;
     }
 }

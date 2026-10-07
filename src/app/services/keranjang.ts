@@ -97,11 +97,7 @@ export class CartService {
     // 1. Potong stok produk di ProdukService
     for (let i = 0; i < this.cartItems.length; i++) {
       const item = this.cartItems[i];
-      // Cari index array berdasarkan ID produk
-      const index = this.produkService.products.findIndex(p => p.id === item.product.id);
-      if (index !== -1) {
-        this.produkService.updateStock(index, -item.qty);
-      }
+      this.produkService.updateStock(item.id, -item.qty);
     }
 
     // 2. Simpan transaksi ke TransaksiService

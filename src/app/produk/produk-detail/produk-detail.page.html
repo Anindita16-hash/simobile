@@ -44,22 +44,22 @@
 
           <div class="row-flex">
             <ion-badge [color]="product.stock === 0 ? 'danger' : product.stock < 10 ? 'warning' : 'medium'">
-              Stok: {{ product.stock }}
+              Stok: {{ getStock(product) }}
             </ion-badge>
-            <ion-button *ngIf="!isInCart(product)" (mousedown)="addToCart(product)" [disabled]="product.stock === 0"
+            <ion-button *ngIf="!isInCart(product)" (mousedown)="addToCart(product)" [disabled]="getStock(product) === 0"
               color="tertiary"><ion-icon name="cart"></ion-icon></ion-button>
             <div class="num-up-down" *ngIf="isInCart(product)">
-              <ion-button *ngIf="quantity > 10" fill="clear" size="large" (mousedown)="subtractQuantityCart(10)">
+              <ion-button *ngIf="getQuantity(product) > 10" fill="clear" size="large" (mousedown)="updateQuantity(product, -10)">
                 <ion-icon name="remove-circle-outline"></ion-icon><span class="ten-text">10</span>
               </ion-button>
-              <ion-button fill="clear" size="large" (mousedown)="subtractQuantityCart()">
+              <ion-button fill="clear" size="large" (mousedown)="updateQuantity(product, -1)">
                 <ion-icon name="remove-circle-outline"></ion-icon>
               </ion-button>
-              <span>{{ quantity }}</span>
-              <ion-button fill="clear" size="large" (mousedown)="addQuantityCart()">
+              <span>{{ getQuantity(product) }}</span>
+              <ion-button fill="clear" size="large" (mousedown)="updateQuantity(product, 1)">
                 <ion-icon name="add-circle-outline"></ion-icon>
               </ion-button>
-              <ion-button fill="clear" size="large" (mousedown)="addQuantityCart(10)">
+              <ion-button fill="clear" size="large" (mousedown)="updateQuantity(product, 10)">
                 <ion-icon name="add-circle-outline"></ion-icon><span class="ten-text">10</span>
               </ion-button>
             </div>
@@ -75,7 +75,7 @@
             <ion-card-content>
               <div class="info-row">
                 <ion-label>Kategori</ion-label>
-                <ion-label>{{ produk.getCategoryName(product.category) }}</ion-label>
+                <ion-label>{{ getCategoryName(product.category) }}</ion-label>
               </div>
               <div class="info-row">
                 <ion-label>Merek</ion-label>
@@ -87,7 +87,7 @@
               </div>
               <div class="info-row">
                 <ion-label>Sisa Stok</ion-label>
-                <ion-label>{{ product.stock }}</ion-label>
+                <ion-label>{{ getStock(product) }}</ion-label>
               </div>
               <div class="info-row">
                 <ion-label>Harga Beli</ion-label>
@@ -113,21 +113,21 @@
 
             <ion-button *ngIf="stockToAdd === 0" (mousedown)="addStock()" color="tertiary">Tambah Stok</ion-button>
             <div class="num-up-down" *ngIf="stockToAdd > 0">
-              <ion-button *ngIf="stockToAdd > 10" fill="clear" size="large" (mousedown)="subtractQuantityStock(10)">
+              <ion-button *ngIf="stockToAdd > 10" fill="clear" size="large" (mousedown)="updateStock(-10)">
                 <ion-icon name="remove-circle-outline"></ion-icon><span class="ten-text">10</span>
               </ion-button>
-              <ion-button fill="clear" size="large" (mousedown)="subtractQuantityStock()">
+              <ion-button fill="clear" size="large" (mousedown)="updateStock(-1)">
                 <ion-icon name="remove-circle-outline"></ion-icon>
               </ion-button>
               <span>{{ stockToAdd }}</span>
-              <ion-button fill="clear" size="large" (mousedown)="addQuantityStock()">
+              <ion-button fill="clear" size="large" (mousedown)="updateStock(1)">
                 <ion-icon name="add-circle-outline"></ion-icon>
               </ion-button>
-              <ion-button fill="clear" size="large" (mousedown)="addQuantityStock(10)">
+              <ion-button fill="clear" size="large" (mousedown)="updateStock(10)">
                 <ion-icon name="add-circle-outline"></ion-icon><span class="ten-text">10</span>
               </ion-button>
             </div>
-            <ion-button color="tertiary" *ngIf="stockToAdd !== 0">Simpan Stok</ion-button>
+            <ion-button color="tertiary" *ngIf="stockToAdd !== 0" (click)="saveStockToAdd(product)">Simpan Stok</ion-button>
           </div>
         </ion-card-content>
       </div>

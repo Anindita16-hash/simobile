@@ -19,9 +19,6 @@ export class ProdukPage implements OnInit {
 
   gridColumn: number = 3;
 
-  // temp
-  quantity: number = 0;
-
   constructor(private produk: Produk, private keranjang: CartService) { }
 
   ngOnInit() {
@@ -61,7 +58,6 @@ export class ProdukPage implements OnInit {
     else return true;
   }
 
-  // temp!! sampai bawah!!
   getQuantity(product: any): number {
     const index = this.keranjang.cartItems.findIndex(i => i.product.id === product.id);
     return this.keranjang.cartItems[index]?.qty || 0;

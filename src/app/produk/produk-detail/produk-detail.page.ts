@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Produk } from '../../services/produk';
+import { CartService } from '../../services/keranjang';
 
 @Component({
   selector: 'app-produk-detail',
@@ -15,10 +16,9 @@ export class ProdukDetailPage implements OnInit {
 
   defaultImage: string = "";
 
-  quantity: number = 0;
   stockToAdd: number = 0;
 
-  constructor(private route: ActivatedRoute, public produk: Produk) { }
+  constructor(private route: ActivatedRoute, private produk: Produk, private keranjang: CartService) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -30,44 +30,52 @@ export class ProdukDetailPage implements OnInit {
     this.defaultImage = this.produk.defaultImage;
   }
 
+  getCategoryName(id: string): string {
+    return this.produk.getCategoryName(id);
+  }
+
   formatPrice(price: number) {
     return 'Rp. ' + (price ? price.toLocaleString('id-ID') : '0');
   }
 
   isInCart(product: any) {
-    if (this.quantity < 1) return false;
+    if (this.getQuantity(product) < 1) return false;
     else return true;
   }
 
-  //temp!!!
+  getQuantity(product: any): number {
+    const index = this.keranjang.cartItems.findIndex(i => i.product.id === product.id);
+    return this.keranjang.cartItems[index]?.qty || 0;
+  }
+
   addToCart(product: any) {
-    this.quantity += 1;
+    this.keranjang.addToCart(product);
   }
 
-  addQuantityCart(amount: number = 1) {
-    let total = this.quantity + amount;
-    if (total > this.product.stock) this.quantity = this.product.stock;
-    else this.quantity = total;
+  updateQuantity(product: any, amount: number = 1) {
+    this.keranjang.updateQuantity(product.id, amount);
   }
 
-  subtractQuantityCart(amount: number = 1) {
-    let total = this.quantity - amount;
-    if (total < 0) this.quantity = 0;
-    else this.quantity = total;
+  removeItem(id: string) {
+    this.keranjang.removeFromCart(id);
   }
-  // sampai sini!!
+
+  getStock(product: any): number {
+    return this.produk.searchProductByID(product.id).stock;
+  }
 
   addStock() {
     this.stockToAdd = 1;
   }
 
-  addQuantityStock(amount: number = 1) {
-    this.stockToAdd += amount;
+  updateStock(amount: number) {
+    let newStock = this.stockToAdd + amount;
+    if (newStock < 0) this.stockToAdd = 0;
+    else this.stockToAdd = newStock;
   }
 
-  subtractQuantityStock(amount: number = 1) {
-    let total = this.stockToAdd - amount;
-    if (total < 0) this.stockToAdd = 0;
-    else this.stockToAdd = total;
+  saveStockToAdd(product: any) {
+    this.produk.updateStock(product.id, this.stockToAdd);
+    this.stockToAdd = 0;
   }
 }
