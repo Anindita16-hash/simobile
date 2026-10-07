@@ -16,8 +16,11 @@ export class TransaksiPage implements OnInit {
   ngOnInit() {
       // get transaction history from service
       this.history = this.transaksi.getHistory();
-
-      console.log('Transaction history:', this.history);
-      console.log('Total transactions:', this.history.length);
     }
+
+  // Refresh tiap halaman dibuka (pola yang sama dengan KeranjangPage),
+  // agar transaksi yang baru dikonfirmasi langsung muncul tanpa restart.
+  ionViewWillEnter() {
+    this.history = this.transaksi.getHistory();
+  }
   }

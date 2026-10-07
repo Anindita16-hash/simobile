@@ -46,20 +46,20 @@
             <ion-badge [color]="product.stock === 0 ? 'danger' : product.stock < 10 ? 'warning' : 'medium'">
               Stok: {{ getStock(product) }}
             </ion-badge>
-            <ion-button *ngIf="!isInCart(product)" (mousedown)="addToCart(product)" [disabled]="getStock(product) === 0"
+            <ion-button *ngIf="!isInCart(product)" (click)="addToCart(product)" [disabled]="getStock(product) === 0"
               color="tertiary"><ion-icon name="cart"></ion-icon></ion-button>
             <div class="num-up-down" *ngIf="isInCart(product)">
-              <ion-button *ngIf="getQuantity(product) > 10" fill="clear" size="large" (mousedown)="updateQuantity(product, -10)">
+              <ion-button *ngIf="getQuantity(product) > 10" fill="clear" size="large" (click)="updateQuantity(product, -10)">
                 <ion-icon name="remove-circle-outline"></ion-icon><span class="ten-text">10</span>
               </ion-button>
-              <ion-button fill="clear" size="large" (mousedown)="updateQuantity(product, -1)">
+              <ion-button fill="clear" size="large" (click)="updateQuantity(product, -1)">
                 <ion-icon name="remove-circle-outline"></ion-icon>
               </ion-button>
               <span>{{ getQuantity(product) }}</span>
-              <ion-button fill="clear" size="large" (mousedown)="updateQuantity(product, 1)">
+              <ion-button fill="clear" size="large" (click)="updateQuantity(product, 1)">
                 <ion-icon name="add-circle-outline"></ion-icon>
               </ion-button>
-              <ion-button fill="clear" size="large" (mousedown)="updateQuantity(product, 10)">
+              <ion-button fill="clear" size="large" (click)="updateQuantity(product, 10)">
                 <ion-icon name="add-circle-outline"></ion-icon><span class="ten-text">10</span>
               </ion-button>
             </div>
@@ -111,23 +111,25 @@
           <div class="row-flex">
             <ion-button [routerLink]="['/produk/produk-form', product.id]" color="tertiary">Edit Produk</ion-button>
 
-            <ion-button *ngIf="stockToAdd === 0" (mousedown)="addStock()" color="tertiary">Tambah Stok</ion-button>
+            <ion-button *ngIf="stockToAdd === 0" (click)="addStock()" color="tertiary">Tambah Stok</ion-button>
             <div class="num-up-down" *ngIf="stockToAdd > 0">
-              <ion-button *ngIf="stockToAdd > 10" fill="clear" size="large" (mousedown)="updateStock(-10)">
+              <ion-button *ngIf="stockToAdd > 10" fill="clear" size="large" (click)="updateStock(-10)">
                 <ion-icon name="remove-circle-outline"></ion-icon><span class="ten-text">10</span>
               </ion-button>
-              <ion-button fill="clear" size="large" (mousedown)="updateStock(-1)">
+              <ion-button fill="clear" size="large" (click)="updateStock(-1)">
                 <ion-icon name="remove-circle-outline"></ion-icon>
               </ion-button>
               <span>{{ stockToAdd }}</span>
-              <ion-button fill="clear" size="large" (mousedown)="updateStock(1)">
+              <ion-button fill="clear" size="large" (click)="updateStock(1)">
                 <ion-icon name="add-circle-outline"></ion-icon>
               </ion-button>
-              <ion-button fill="clear" size="large" (mousedown)="updateStock(10)">
+              <ion-button fill="clear" size="large" (click)="updateStock(10)">
                 <ion-icon name="add-circle-outline"></ion-icon><span class="ten-text">10</span>
               </ion-button>
             </div>
-            <ion-button color="tertiary" *ngIf="stockToAdd !== 0" (click)="saveStockToAdd(product)">Simpan Stok</ion-button>
+            <ion-button color="tertiary" *ngIf="stockToAdd !== 0" (click)="saveStockToAdd(product)">
+              Simpan Stok
+            </ion-button>
           </div>
         </ion-card-content>
       </div>

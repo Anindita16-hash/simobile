@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Produk } from '../../services/produk';
-import { CartService } from '../../services/keranjang';
+import { Keranjang } from '../../services/keranjang';
 
 @Component({
   selector: 'app-produk-detail',
@@ -18,7 +18,7 @@ export class ProdukDetailPage implements OnInit {
 
   stockToAdd: number = 0;
 
-  constructor(private route: ActivatedRoute, private produk: Produk, private keranjang: CartService) { }
+  constructor(private route: ActivatedRoute, private produk: Produk, private keranjang: Keranjang) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -79,7 +79,10 @@ export class ProdukDetailPage implements OnInit {
   }
 
   saveStockToAdd(product: any) {
+    // find product, if exist add
     this.produk.updateStock(product.id, this.stockToAdd);
+
+    // reset temporary stock counter
     this.stockToAdd = 0;
-  }
+    }
 }

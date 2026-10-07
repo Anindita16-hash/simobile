@@ -12,13 +12,19 @@
 .product-image {
     width: 100%;
     height: 300px;
-    background-color: #f1f1f1;
+    background-color: var(--ion-color-light);
     object-fit: contain;
+}
+
+// Area navigasi ke detail (pengganti atribut button+routerLink di ion-card,
+// agar tombol cart di bawahnya tidak konflik).
+.card-nav {
+    cursor: pointer;
 }
 
 .ten-text {
     font-size: small;
-    color: black;
+    color: var(--ion-text-color);
 }
 
 .btn-tambah-produk {
