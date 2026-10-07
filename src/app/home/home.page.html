@@ -35,22 +35,22 @@
     <!--dashboard content-->
     <div class="content-dashboard">
       <!--card: total penjualan-->
-      <ion-card>
+      <ion-card class="zoom">
         <ion-card-header>
           <ion-card-title>Total Penjualan</ion-card-title>
-          <ion-card-subtitle>{{ formatPrice(totalPenjualan) }}</ion-card-subtitle>
+          <ion-card-subtitle class="fade">{{ formatPrice(totalPenjualan) }}</ion-card-subtitle>
         </ion-card-header>
       </ion-card>
 
       <!--grid: other summaries-->
-      <ion-grid>
+      <ion-grid class="zoom">
         <ion-row>
           <!--Estimasi Untung-->
           <ion-col size="6">
             <ion-card>
               <ion-card-header>
                 <ion-card-title>Estimasi Untung</ion-card-title>
-                <ion-card-subtitle>{{ formatPrice(estimasiUntung) }}</ion-card-subtitle>
+                <ion-card-subtitle class="fade">{{ formatPrice(estimasiUntung) }}</ion-card-subtitle>
               </ion-card-header>
             </ion-card>
           </ion-col>
@@ -60,7 +60,7 @@
             <ion-card>
               <ion-card-header>
                 <ion-card-title>Jumlah Transaksi</ion-card-title>
-                <ion-card-subtitle>{{ jumlahTransaksi }}</ion-card-subtitle>
+                <ion-card-subtitle class="fade">{{ jumlahTransaksi }}</ion-card-subtitle>
               </ion-card-header>
             </ion-card>
           </ion-col>
@@ -70,7 +70,7 @@
             <ion-card>
               <ion-card-header>
                 <ion-card-title>Barang Terjual</ion-card-title>
-                <ion-card-subtitle>{{ barangTerjual }} pcs</ion-card-subtitle>
+                <ion-card-subtitle class="fade">{{ barangTerjual }} pcs</ion-card-subtitle>
               </ion-card-header>
             </ion-card>
           </ion-col>
@@ -80,10 +80,10 @@
             <ion-card>
               <ion-card-header>
                 <ion-card-title>Produk Terlaris</ion-card-title>
-                <ion-card-subtitle>{{ produkTerlarisNama }}</ion-card-subtitle>
+                <ion-card-subtitle class="fade">{{ produkTerlarisNama }}</ion-card-subtitle>
               </ion-card-header>
               <!--detail penjualan produk terlaris-->
-              <ion-card-content>
+              <ion-card-content class="fade">
                 {{ produkTerlarisDetail }}
               </ion-card-content>
             </ion-card>

@@ -38,7 +38,7 @@
        Ini menghilangkan konflik klik: tombol cart tidak lagi tertelan
        navigasi ke detail (masalah sebelumnya diatasi dengan stopPropagation,
        sekarang diselesaikan secara struktural). -->
-  <ion-grid>
+  <ion-grid id="unfurl">
     <ion-row class="product-row" *ngFor="let products2 of chunkArray(products, gridColumn)">
       <ion-col *ngFor="let product of products2">
         <ion-card>
@@ -61,7 +61,9 @@
               <ion-label class="product-price">{{ formatPrice(product.sellPrice) }}</ion-label>
 
               <ion-button *ngIf="!isInCart(product)" (click)="addToCart(product)" [disabled]="product.stock === 0"
-                color="tertiary"><ion-icon name="cart"></ion-icon></ion-button>
+                color="tertiary">
+                <ion-icon name="cart"></ion-icon></ion-button>
+
               <div class="num-up-down" *ngIf="isInCart(product)">
                 <span *ngIf="getQuantity(product) > 0">{{ formatPrice(getSubtotal(product)) }}</span>
                 <ion-button *ngIf="getQuantity(product) > 10" fill="clear" size="large"

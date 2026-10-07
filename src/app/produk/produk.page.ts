@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Produk } from '../services/produk';
 import { Keranjang } from '../services/keranjang';
 import { ChangeDetectorRef } from '@angular/core';
+import { AnimationController } from '@ionic/angular';
 
 @Component({
   selector: 'app-produk',
@@ -20,7 +21,12 @@ export class ProdukPage implements OnInit {
 
   gridColumn: number = 3;
 
-  constructor(private produk: Produk, private keranjang: Keranjang, private cdr: ChangeDetectorRef) { }
+  constructor(
+    private produk: Produk,
+    private keranjang: Keranjang,
+    private cdr: ChangeDetectorRef,
+    private animationController: AnimationController,
+  ) { }
 
   ngOnInit() {
     this.products = this.produk.products;
@@ -31,6 +37,24 @@ export class ProdukPage implements OnInit {
   ionViewWillEnter() {
     this.filter();
     this.cdr.detectChanges();
+  }
+
+  ionViewDidEnter() {
+    this.fadeGrid();
+  }
+
+  fadeGrid() {
+    const gridElement = document.querySelector('#unfurl') as HTMLElement;
+    const animation = this.animationController
+    .create()
+    .addElement(gridElement)
+    .duration(2000)
+    .iterations(1)
+    .keyframes([
+      { offset: 0, clipPath: 'inset(0 0 100% 0)' },
+      { offset: 1, clipPath: 'inset(0 0 0% 0)' },
+    ]);
+    animation.play();
   }
 
   setInput(name: string) {

@@ -26,7 +26,7 @@
 
   <!--List item transaksi-->
   <ion-list *ngIf="history.length > 0">
-    <ion-item button detail="true" *ngFor="let trx of history"
+    <ion-item class="slide" button detail="true" *ngFor="let trx of history"
       [routerLink]="['/transaksi/transaksi-detail', trx.id]">
       <ion-label>
         <h2>Transaksi #{{ trx.id }}</h2>

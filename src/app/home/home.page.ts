@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Transaksi } from '../services/transaksi';
 import { Profil } from '../services/profil';
+import { AnimationController } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -23,7 +24,8 @@ export class HomePage implements OnInit {
   constructor(
     private transaksiService: Transaksi,
     private profilService: Profil,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private animationController: AnimationController
   ) { }
 
   ngOnInit() {
@@ -41,6 +43,45 @@ export class HomePage implements OnInit {
   ionViewDidEnter() {
     this.loadDashboard();
     this.cdr.detectChanges();
+    this.zoomContainer();
+    this.fadeText();
+  }
+
+  zoomContainer() {
+    const containerElements = document.querySelectorAll('.zoom');
+    const animation = this.animationController.create();
+
+    containerElements.forEach(element => {
+      animation.addElement(element);
+    });
+
+    animation
+    .duration(750)
+    .iterations(1)
+    .keyframes([
+      { offset: 0, transform: 'scale(0)', opacity: '0' },
+      { offset: 1, transform: 'scale(1)', opacity: '1' }
+    ]);
+    animation.play();
+  }
+
+  fadeText() {
+    const textElements = document.querySelectorAll('.fade');
+    const animation = this.animationController.create();
+
+    textElements.forEach(text => {
+      animation.addElement(text);
+    });
+
+    animation
+    .duration(1000)
+    .delay(800)
+    .iterations(1)
+    .keyframes([
+      { offset: 0, opacity: '0' },
+      { offset: 1, opacity: '1' }
+    ]);
+    animation.play();
   }
 
   loadDashboard() {
